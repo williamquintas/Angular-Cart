@@ -6,5 +6,8 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
-  name = 'Music Store';
+  config = {
+    name: 'Music Store',
+    icon: 'library_music',
+  };
 }
