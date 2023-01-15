@@ -1,0 +1,26 @@
+mat-card {
+  width: 600px;
+  margin-block: 8px;
+  padding: 8px;
+
+  color: #000;
+  background-color: #bbb;
+
+  border: 0;
+}
+
+mat-card-subtitle {
+  color: #000;
+}
+
+.add-button {
+  padding: 8px;
+  background-color: transparent;
+  cursor: pointer;
+
+  border: 0;
+
+  &:hover {
+    color: rgba(0, 0, 0, 0.6);
+  }
+}

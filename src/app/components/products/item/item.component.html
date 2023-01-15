@@ -1,0 +1,18 @@
+<mat-card>
+  <div style="display: flex; flex-direction: row">
+    <img mat-card-md-image [src]="item.imageUrl" />
+    <mat-card-header>
+      <mat-card-title>{{ item.title }}: ${{ item.unitPrice }}</mat-card-title>
+      <mat-card-subtitle>{{ item.description }}</mat-card-subtitle>
+    </mat-card-header>
+  </div>
+  <mat-card-actions align="end">
+    <button
+      class="mat-button add-button"
+      matTooltip="Add to cart"
+      matTooltipPosition="right"
+    >
+      <mat-icon>add_circle</mat-icon>
+    </button>
+  </mat-card-actions>
+</mat-card>
