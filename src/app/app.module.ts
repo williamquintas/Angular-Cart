@@ -3,11 +3,16 @@ import { BrowserModule } from "@angular/platform-browser";
 
 import { MatButtonModule } from "@angular/material/button";
 import { MatCardModule } from "@angular/material/card";
+import { MatDividerModule } from "@angular/material/divider";
 import { MatIconModule } from "@angular/material/icon";
+import { MatListModule } from "@angular/material/list";
+import { MatSidenavModule } from "@angular/material/sidenav";
+import { MatSnackBarModule } from "@angular/material/snack-bar";
 import { MatToolbarModule } from "@angular/material/toolbar";
 import { MatTooltipModule } from "@angular/material/tooltip";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 
+import { CartComponent } from "~components/cart/cart.component";
 import { FooterComponent } from "~components/footer/footer.component";
 import { HeaderComponent } from "~components/header/header.component";
 import { ProductsItemComponent } from "~components/products/item/item.component";
@@ -23,6 +28,7 @@ import { AppComponent } from "./app.component";
     FooterComponent,
     ProductsListComponent,
     ProductsItemComponent,
+    CartComponent,
   ],
   imports: [
     BrowserModule,
@@ -30,7 +36,11 @@ import { AppComponent } from "./app.component";
     BrowserAnimationsModule,
     MatButtonModule,
     MatCardModule,
+    MatDividerModule,
     MatIconModule,
+    MatListModule,
+    MatSidenavModule,
+    MatSnackBarModule,
     MatToolbarModule,
     MatTooltipModule,
   ],

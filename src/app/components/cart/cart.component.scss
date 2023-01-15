@@ -1,0 +1,37 @@
+mat-sidenav {
+  width: 360px;
+}
+
+mat-list-item {
+  border-bottom: solid 1px rgba(255, 255, 255, 0.12);
+
+  p {
+    margin-bottom: 0;
+  }
+
+  div {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
+
+  button {
+    width: 24px;
+    height: 24px;
+    min-width: 0 !important;
+    padding: 0;
+  }
+
+  span {
+    margin-inline: 8px;
+    padding-inline: 16px;
+
+    border-radius: 4px;
+    background-color: #ddd;
+    color: #333;
+  }
+
+  mat-divider {
+    margin-inline: 16px;
+  }
+}

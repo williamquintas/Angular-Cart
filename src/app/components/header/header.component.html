@@ -4,7 +4,11 @@
     <span>{{ name }}</span>
   </div>
 
-  <button class="cart-button" aria-label="Button with cart icon">
+  <button
+    class="cart-button"
+    aria-label="Button with cart icon"
+    (click)="toggleCart()"
+  >
     <mat-icon>shopping_basket</mat-icon>
   </button>
 </mat-toolbar>

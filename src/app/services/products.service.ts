@@ -6,7 +6,6 @@ import data from "../data/products.json";
 })
 export class ProductsService {
   getProducts = () => {
-    console.log(data.products);
     return data.products;
   };
 }

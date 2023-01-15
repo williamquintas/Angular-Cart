@@ -1,3 +1,6 @@
-<app-header [name]="config.name" [icon]="config.icon" />
-<app-products-list />
-<app-footer [name]="config.name" />
+<mat-sidenav-container>
+    <app-header [name]="config.name" [icon]="config.icon" (toggleCartOpened)="isCartOpened = !isCartOpened"/>
+    <app-products-list (shouldAddToCart)="addToCart($event)"/>
+    <app-cart [items]="cartItems" [isCartOpened]="isCartOpened" (shouldCloseCart)="closeCart()"/>
+    <app-footer [name]="config.name" />
+</mat-sidenav-container>
