@@ -25,7 +25,9 @@
       "~models/*": ["src/app/models/*"],
       "~services/*": ["src/app/services/*"],
       "~utils/*": ["src/app/utils/*"]
-    }
+    },
+    "resolveJsonModule": true,
+    "esModuleInterop": true
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,
