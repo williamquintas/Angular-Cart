@@ -34,4 +34,16 @@ export class CartComponent {
       }
     }
   }
+
+  calculateSubtotal(): number {
+    return this.items.reduce((currentSum, item) => {
+      return (currentSum += item.unitPrice * item.quantity);
+    }, 0);
+  }
+
+  calculateTotal(): number {
+    return this.items.reduce((currentSum, item) => {
+      return (currentSum += item.unitPrice * item.quantity);
+    }, 0);
+  }
 }

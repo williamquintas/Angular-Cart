@@ -7,40 +7,52 @@
   <mat-divider></mat-divider>
 
   <mat-sidenav-content>
-    <mat-list *ngIf="items.length > 0; else emptyList">
-      <mat-list-item *ngFor="let item of items">
-        <img matListItemAvatar [src]="item.imageUrl" />
-        <h3 matListItemTitle>{{ item.title }}</h3>
-        <p matListItemLine>{{ item.description }} (${{ item.unitPrice }})</p>
-        <div matListItemLine>
-          <button
-            (click)="updateQuantity(item.id, item.quantity - 1)"
-            mat-button
-            color="warn"
-          >
-            -
-          </button>
-          <span>{{ item.quantity }}</span>
-          <button
-            (click)="updateQuantity(item.id, item.quantity + 1)"
-            mat-button
-            color="accent"
-          >
-            +
-          </button>
-          <mat-divider [vertical]="true"></mat-divider>
-          <button
-            (click)="updateQuantity(item.id, 0)"
-            mat-button
-            color="warn"
-            style="position: absolute; right: 16px"
-          >
-            <mat-icon>delete</mat-icon>
-          </button>
-        </div>
-        <mat-divider></mat-divider>
-      </mat-list-item>
-    </mat-list>
+    <ng-container *ngIf="items.length > 0; else emptyList">
+      <mat-list>
+        <mat-list-item *ngFor="let item of items">
+          <img matListItemAvatar [src]="item.imageUrl" />
+          <h3 matListItemTitle>{{ item.title }}</h3>
+          <p matListItemLine>{{ item.description }} (${{ item.unitPrice }})</p>
+          <div matListItemLine>
+            <button
+              (click)="updateQuantity(item.id, item.quantity - 1)"
+              mat-button
+              color="warn"
+            >
+              -
+            </button>
+            <span>{{ item.quantity }}</span>
+            <button
+              (click)="updateQuantity(item.id, item.quantity + 1)"
+              mat-button
+              color="accent"
+            >
+              +
+            </button>
+            <mat-divider [vertical]="true"></mat-divider>
+            <button
+              (click)="updateQuantity(item.id, 0)"
+              mat-button
+              color="warn"
+              style="position: absolute; right: 16px"
+            >
+              <mat-icon>delete</mat-icon>
+            </button>
+          </div>
+          <mat-divider></mat-divider>
+        </mat-list-item>
+      </mat-list>
+
+      <div style="padding: 16px">
+        <p>
+          Subtotal for {{ items.length }} item(s): ${{ calculateSubtotal() }}
+        </p>
+        <p>Total: ${{ calculateTotal() }}</p>
+        <button mat-flat-button color="accent" style="width: 100%">
+          Finish Order
+        </button>
+      </div>
+    </ng-container>
     <ng-template #emptyList>
       <div
         style="
