@@ -1,0 +1,29 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+
+  background-color: rgb(19, 25, 33);
+  color: white;
+
+  div {
+    display: flex;
+    align-items: center;
+
+    mat-icon {
+      margin-right: 8px;
+    }
+  }
+
+  .cart-button {
+    padding: 8px;
+    border: 0;
+    min-width: 40px;
+    background-color: transparent;
+    color: white;
+    cursor: pointer;
+
+    &:hover {
+      color: rgba(255, 255, 255, 0.6);
+    }
+  }
+}
