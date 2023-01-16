@@ -1,7 +1,7 @@
 <mat-sidenav #cart mode="over" position="end" [opened]="isCartOpened">
-  <div style="display: flex; flex-direction: row; align-items: center">
+  <div class="sidenav-header">
     <button mat-button (click)="closeCart()">X</button>
-    <b style="margin-left: 8px">Shopping Cart</b>
+    <b class="sidenav-title">Shopping Cart</b>
   </div>
 
   <mat-divider></mat-divider>
@@ -34,7 +34,7 @@
               (click)="updateQuantity(item.id, 0)"
               mat-button
               color="warn"
-              style="position: absolute; right: 16px"
+              class="delete-button"
             >
               <mat-icon>delete</mat-icon>
             </button>
@@ -43,9 +43,9 @@
         </mat-list-item>
       </mat-list>
 
-      <div style="padding: 16px">
+      <div class="finish-order-section">
         <p>Subtotal for {{ totalItems }} item(s): ${{ subtotal }}</p>
-        <div style="display: flex; align-items: center">
+        <div class="coupon-section">
           <mat-form-field appearance="fill">
             <mat-label>Insert the coupon</mat-label>
             <input
@@ -60,7 +60,7 @@
           <button
             mat-flat-button
             color="primary"
-            style="margin-left: 8px"
+            class="apply-button"
             (click)="validateCoupon()"
           >
             Apply
@@ -70,7 +70,7 @@
         <button
           mat-flat-button
           color="accent"
-          style="width: 100%"
+          class="finish-order-button"
           (click)="finishOrder()"
         >
           Finish Order
@@ -78,16 +78,7 @@
       </div>
     </ng-container>
     <ng-template #emptyList>
-      <div
-        style="
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-          justify-content: center;
-          height: 100vh;
-          font-weight: bold;
-        "
-      >
+      <div class="empty-list-section">
         <p>Your cart is empty!</p>
         <p>Please select some products.</p>
       </div>
