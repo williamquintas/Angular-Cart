@@ -21,17 +21,9 @@ import {
 import { CartComponent } from "~shared/components/cart/cart.component";
 import { FooterComponent } from "~shared/components/footer/footer.component";
 import { HeaderComponent } from "~shared/components/header/header.component";
-import { ProductsItemComponent } from "~shared/components/products/item/item.component";
-import { ProductsListComponent } from "~shared/components/products/list/list.component";
 
 @NgModule({
-  declarations: [
-    CartComponent,
-    FooterComponent,
-    HeaderComponent,
-    ProductsListComponent,
-    ProductsItemComponent,
-  ],
+  declarations: [CartComponent, FooterComponent, HeaderComponent],
   imports: [
     CommonModule,
     FormsModule,
@@ -51,12 +43,6 @@ import { ProductsListComponent } from "~shared/components/products/list/list.com
     NgbTooltipModule,
     RouterModule,
   ],
-  exports: [
-    CartComponent,
-    FooterComponent,
-    HeaderComponent,
-    ProductsListComponent,
-    ProductsItemComponent,
-  ],
+  exports: [CartComponent, FooterComponent, HeaderComponent],
 })
 export class SharedModule {}

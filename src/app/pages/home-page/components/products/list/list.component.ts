@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Output } from "@angular/core";
-import { IProducts } from "src/app/shared/models/IProducts";
 import { ProductsService } from "~services/products.service";
+import { IProducts } from "~shared/models/IProducts";
 
 @Component({
   selector: "app-products-list",

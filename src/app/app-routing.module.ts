@@ -1,19 +1,19 @@
 import { NgModule } from "@angular/core";
 import { RouterModule, Routes } from "@angular/router";
 
-import { HomePageComponent } from "~pages/home-page/home-page.component";
+import { HomePage } from "~pages/home-page/home-page.component";
 import storeConfig from "~shared/data/config.json";
 
 const routes: Routes = [
   {
-    path: "home",
-    component: HomePageComponent,
+    path: "products",
+    component: HomePage,
     title: storeConfig.name,
   },
-  { path: "", redirectTo: "home", pathMatch: "full" },
+  { path: "", redirectTo: "products", pathMatch: "full" },
   {
     path: "**",
-    redirectTo: "home",
+    redirectTo: "products",
   },
 ];
 

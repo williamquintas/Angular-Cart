@@ -5,6 +5,6 @@ import storeConfig from "~shared/data/config.json";
   templateUrl: "./home-page.component.html",
   styleUrls: ["./home-page.component.scss"],
 })
-export class HomePageComponent {
+export class HomePage {
   name = storeConfig.name;
 }
