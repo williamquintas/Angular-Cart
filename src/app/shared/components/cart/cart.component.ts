@@ -8,7 +8,7 @@ import {
 import { FormControl } from "@angular/forms";
 import { MatSidenav } from "@angular/material/sidenav";
 import { MatSnackBar } from "@angular/material/snack-bar";
-import { ICartItems } from "~models/ICartItems";
+import { ICartItems } from "src/app/shared/models/ICartItems";
 import { CouponsService } from "~services/coupons.service";
 
 @Component({

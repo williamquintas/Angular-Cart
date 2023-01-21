@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Output } from "@angular/core";
-import { IProducts } from "~models/IProducts";
+import { IProducts } from "src/app/shared/models/IProducts";
 import { ProductsService } from "~services/products.service";
 
 @Component({

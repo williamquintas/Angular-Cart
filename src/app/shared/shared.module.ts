@@ -12,26 +12,22 @@ import { MatSidenavModule } from "@angular/material/sidenav";
 import { MatSnackBarModule } from "@angular/material/snack-bar";
 import { MatToolbarModule } from "@angular/material/toolbar";
 import { MatTooltipModule } from "@angular/material/tooltip";
-import { BrowserModule } from "@angular/platform-browser";
 
-import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
-
-import { CoreModule } from "~core/core.module";
-import { PagesModule } from "~pages/pages.module";
-import { SharedModule } from "~shared/shared.module";
-
-import { AppRoutingModule } from "./app-routing.module";
-import { AppComponent } from "./app.component";
+import { CartComponent } from "~shared/components/cart/cart.component";
+import { FooterComponent } from "~shared/components/footer/footer.component";
+import { HeaderComponent } from "~shared/components/header/header.component";
+import { ProductsItemComponent } from "~shared/components/products/item/item.component";
+import { ProductsListComponent } from "~shared/components/products/list/list.component";
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [
+    CartComponent,
+    FooterComponent,
+    HeaderComponent,
+    ProductsListComponent,
+    ProductsItemComponent,
+  ],
   imports: [
-    BrowserModule,
-    CoreModule,
-    PagesModule,
-    SharedModule,
-    AppRoutingModule,
-    BrowserAnimationsModule,
     CommonModule,
     FormsModule,
     MatButtonModule,
@@ -47,7 +43,12 @@ import { AppComponent } from "./app.component";
     MatTooltipModule,
     ReactiveFormsModule,
   ],
-  providers: [],
-  bootstrap: [AppComponent],
+  exports: [
+    CartComponent,
+    FooterComponent,
+    HeaderComponent,
+    ProductsListComponent,
+    ProductsItemComponent,
+  ],
 })
-export class AppModule {}
+export class SharedModule {}

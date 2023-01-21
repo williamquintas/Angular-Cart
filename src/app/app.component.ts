@@ -1,7 +1,7 @@
 import { Component } from "@angular/core";
 import { MatSnackBar } from "@angular/material/snack-bar";
-import { ICartItems } from "./models/ICartItems";
-import { IProducts } from "./models/IProducts";
+import { ICartItems } from "~shared/models/ICartItems";
+import { IProducts } from "~shared/models/IProducts";
 
 @Component({
   selector: "app-root",
