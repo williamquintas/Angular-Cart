@@ -12,6 +12,11 @@ import { MatSidenavModule } from "@angular/material/sidenav";
 import { MatSnackBarModule } from "@angular/material/snack-bar";
 import { MatToolbarModule } from "@angular/material/toolbar";
 import { MatTooltipModule } from "@angular/material/tooltip";
+import { RouterModule } from "@angular/router";
+import {
+  NgbCollapseModule,
+  NgbTooltipModule,
+} from "@ng-bootstrap/ng-bootstrap";
 
 import { CartComponent } from "~shared/components/cart/cart.component";
 import { FooterComponent } from "~shared/components/footer/footer.component";
@@ -42,6 +47,9 @@ import { ProductsListComponent } from "~shared/components/products/list/list.com
     MatToolbarModule,
     MatTooltipModule,
     ReactiveFormsModule,
+    NgbCollapseModule,
+    NgbTooltipModule,
+    RouterModule,
   ],
   exports: [
     CartComponent,

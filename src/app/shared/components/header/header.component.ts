@@ -1,4 +1,5 @@
-import { Component, EventEmitter, Input, Output } from "@angular/core";
+import { Component, EventEmitter, Output } from "@angular/core";
+import storeConfig from "~shared/data/config.json";
 
 @Component({
   selector: "app-header",
@@ -6,10 +7,11 @@ import { Component, EventEmitter, Input, Output } from "@angular/core";
   styleUrls: ["./header.component.scss"],
 })
 export class HeaderComponent {
-  @Input() name: string = "My Store";
-  @Input() icon: string | undefined = undefined;
+  name = storeConfig.name ?? "Store";
+  icon = storeConfig.icon ?? "bi-shop";
 
   @Output() toggleCartOpened = new EventEmitter<any>();
+  isMenuCollapsed = true;
 
   toggleCart() {
     this.toggleCartOpened.emit();

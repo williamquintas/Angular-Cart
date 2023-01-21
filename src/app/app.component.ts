@@ -9,10 +9,6 @@ import { IProducts } from "~shared/models/IProducts";
   styleUrls: ["./app.component.scss"],
 })
 export class AppComponent {
-  config = {
-    name: "Music Store",
-    icon: "library_music",
-  };
   cartItems: ICartItems[] = [];
   isCartOpened = false;
 
