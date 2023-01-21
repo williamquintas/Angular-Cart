@@ -86,7 +86,9 @@
               "@angular/material/prebuilt-themes/purple-green.css",
               "src/styles.scss"
             ],
-            "scripts": []
+            "scripts": [],
+            "codeCoverage": true,
+            "karmaConfig": "karma.conf.js"
           }
         }
       }
