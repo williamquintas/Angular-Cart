@@ -1,7 +1,9 @@
-<app-header (toggleCartOpened)="isCartOpened = !isCartOpened"/>
+<app-header />
 <div class="content-container">
     <router-outlet></router-outlet>
 </div>
-<!-- <app-products-list (shouldAddToCart)="addToCart($event)"/> -->
-<!-- <app-cart [items]="cartItems" [isCartOpened]="isCartOpened" (shouldCloseCart)="closeCart()"/> -->
 <app-footer />
+
+<div class="toast-container">
+    <app-toast />
+</div>

@@ -6,9 +6,10 @@ import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
 
 import { FooterComponent } from "~shared/components/footer/footer.component";
 import { HeaderComponent } from "~shared/components/header/header.component";
+import { ToastComponent } from "./components/toast/toast.component";
 
 @NgModule({
-  declarations: [FooterComponent, HeaderComponent],
+  declarations: [FooterComponent, HeaderComponent, ToastComponent],
   imports: [
     CommonModule,
     FormsModule,
@@ -16,6 +17,6 @@ import { HeaderComponent } from "~shared/components/header/header.component";
     NgbModule,
     ReactiveFormsModule,
   ],
-  exports: [FooterComponent, HeaderComponent],
+  exports: [FooterComponent, HeaderComponent, ToastComponent],
 })
 export class SharedModule {}

@@ -1,9 +1,9 @@
 import { NgModule } from "@angular/core";
 import { RouterModule, Routes } from "@angular/router";
 
+import { CartPage } from "~pages/cart-page/cart-page.component";
 import { HomePage } from "~pages/home-page/home-page.component";
 import storeConfig from "~shared/data/config.json";
-import { CartPage } from "./pages/cart-page/cart-page.component";
 
 const routes: Routes = [
   {

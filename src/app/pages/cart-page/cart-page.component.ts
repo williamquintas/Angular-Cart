@@ -1,10 +1,10 @@
 import { ChangeDetectionStrategy, Component } from "@angular/core";
 import { FormControl } from "@angular/forms";
-import { MatSnackBar } from "@angular/material/snack-bar";
 import { Subject, takeUntil } from "rxjs";
 import { ICartItems } from "src/app/shared/models/ICartItems";
+import { CartService } from "~services/cart.service";
 import { CouponsService } from "~services/coupons.service";
-import { CartService } from "../../core/services/cart.service";
+import { ToastsService } from "~services/toasts.service";
 
 @Component({
   selector: "app-cart-page",
@@ -22,7 +22,7 @@ export class CartPage {
   constructor(
     private cartService: CartService,
     private couponsService: CouponsService,
-    private _snackBar: MatSnackBar
+    private toastsService: ToastsService
   ) {}
 
   ngOnInit() {
@@ -105,11 +105,12 @@ export class CartPage {
         this.couponField.setValue("");
         this.couponField.setErrors(null);
 
-        this._snackBar.open("Coupon applied!", "Dismiss", {
-          horizontalPosition: "right",
-          verticalPosition: "top",
-          duration: 2000,
-        });
+        this.toastsService.show(
+          {
+            body: "Coupon applied",
+          },
+          { classname: "bg-success text-light" }
+        );
       }
     }
   }
@@ -118,10 +119,11 @@ export class CartPage {
     this.items.splice(0, this.items.length);
     this.appliedCoupons.splice(0, this.appliedCoupons.length);
 
-    this._snackBar.open("Your order will be sent soon!", "Dismiss", {
-      horizontalPosition: "right",
-      verticalPosition: "top",
-      duration: 2000,
-    });
+    this.toastsService.show(
+      {
+        body: "Your order will be sent soon!",
+      },
+      { classname: "bg-success text-light" }
+    );
   }
 }
