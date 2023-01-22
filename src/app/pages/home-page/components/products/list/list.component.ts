@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output } from "@angular/core";
+import { Component } from "@angular/core";
 import { ProductsService } from "~services/products.service";
 import { IProducts } from "~shared/models/IProducts";
 
@@ -8,17 +8,11 @@ import { IProducts } from "~shared/models/IProducts";
   styleUrls: ["./list.component.scss"],
 })
 export class ProductsListComponent {
-  @Output() shouldAddToCart = new EventEmitter<IProducts>();
-
   list: IProducts[] = [];
 
   constructor(private service: ProductsService) {}
 
   ngOnInit() {
     this.list = this.service.getProducts() as IProducts[];
-  }
-
-  addToCart(item: IProducts) {
-    this.shouldAddToCart.emit(item);
   }
 }

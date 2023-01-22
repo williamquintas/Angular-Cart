@@ -1,0 +1,6 @@
+$header-height: 56px;
+$footer-height: 42px;
+
+div.content-container {
+  min-height: calc(100vh - $header-height - $footer-height);
+}

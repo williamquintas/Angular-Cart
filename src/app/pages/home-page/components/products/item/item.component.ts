@@ -1,4 +1,5 @@
-import { Component, EventEmitter, Input, Output } from "@angular/core";
+import { Component, Input } from "@angular/core";
+import { CartService } from "~services/cart.service";
 import { IProducts } from "~shared/models/IProducts";
 
 @Component({
@@ -15,9 +16,10 @@ export class ProductsItemComponent {
     unitPrice: 0,
   };
 
-  @Output() addItemToCart = new EventEmitter<IProducts>();
+  constructor(private cartService: CartService) {}
 
   addToCart() {
-    this.addItemToCart.emit(this.item);
+    const cartItem = { ...this.item, quantity: 1 };
+    this.cartService.add(cartItem);
   }
 }
