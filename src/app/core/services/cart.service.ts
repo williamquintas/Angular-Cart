@@ -6,17 +6,7 @@ import { ICartItem } from "~shared/models/ICartItem";
   providedIn: "root",
 })
 export class CartService {
-  private cartItems: ICartItem[] = [
-    {
-      id: 0,
-      title: "Thriller",
-      description: "Michael Jackson | 1982",
-      imageUrl:
-        "https://upload.wikimedia.org/wikipedia/en/5/55/Michael_Jackson_-_Thriller.png",
-      unitPrice: 51.29,
-      quantity: 3,
-    },
-  ];
+  private cartItems: ICartItem[] = [];
   private cartItems$ = new BehaviorSubject<ICartItem[]>(this.cartItems);
 
   constructor() {}
