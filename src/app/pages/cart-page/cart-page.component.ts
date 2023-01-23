@@ -1,10 +1,13 @@
 import { ChangeDetectionStrategy, Component } from "@angular/core";
 import { FormControl } from "@angular/forms";
-import { Subject, takeUntil } from "rxjs";
-import { ICartItems } from "src/app/shared/models/ICartItems";
+import { Router } from "@angular/router";
+import { first, Subject, takeUntil } from "rxjs";
 import { CartService } from "~services/cart.service";
 import { CouponsService } from "~services/coupons.service";
+import { OrdersService } from "~services/orders.service";
 import { ToastsService } from "~services/toasts.service";
+import { ICartItem } from "~shared/models/ICartItem";
+import { IOrder } from "../../shared/models/IOrder";
 
 @Component({
   selector: "app-cart-page",
@@ -13,14 +16,16 @@ import { ToastsService } from "~services/toasts.service";
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CartPage {
-  items: ICartItems[] = [];
+  items: ICartItem[] = [];
   appliedCoupons: string[] = [];
-  componentDestroyed$ = new Subject<boolean>();
+  isComponentDestroyed$ = new Subject<boolean>();
 
   couponField = new FormControl("", null);
 
   constructor(
+    private router: Router,
     private cartService: CartService,
+    private ordersService: OrdersService,
     private couponsService: CouponsService,
     private toastsService: ToastsService
   ) {}
@@ -28,20 +33,29 @@ export class CartPage {
   ngOnInit() {
     this.cartService
       .getAll()
-      .pipe(takeUntil(this.componentDestroyed$))
+      .pipe(takeUntil(this.isComponentDestroyed$), first())
       .subscribe((items) => {
         this.items = items;
       });
   }
 
   ngOnDestroy() {
-    this.componentDestroyed$.next(true);
-    this.componentDestroyed$.complete();
+    this.isComponentDestroyed$.next(true);
+    this.isComponentDestroyed$.complete();
   }
 
-  updateQuantity(item: ICartItems, quantity: number) {
+  updateQuantity(item: ICartItem, quantity: number) {
     try {
       this.cartService.update({ ...item, quantity });
+
+      if (quantity === 0) {
+        this.toastsService.show(
+          { body: "Item deleted" },
+          {
+            classname: "bg-warn text-light",
+          }
+        );
+      }
     } catch (error) {
       console.error(error);
     }
@@ -53,27 +67,20 @@ export class CartPage {
     }, 0);
   }
 
-  get subtotal(): string {
-    return Number(
-      this.items.reduce((currentSum, item) => {
-        return (currentSum += item.unitPrice * item.quantity);
-      }, 0)
-    ).toFixed(2);
+  get subtotal(): number {
+    return this.items.reduce((currentSum, item) => {
+      return (currentSum += item.unitPrice * item.quantity);
+    }, 0);
   }
 
-  get total(): string {
+  get total(): number {
     const discountSum = this.appliedCoupons.reduce((discountSum, coupon) => {
       const discount: string = coupon.slice(-2);
       return discountSum + Number(discount);
     }, 0);
+    const percentageDiscount = (100 - discountSum) / 100;
 
-    return Number(
-      (this.items.reduce((currentSum, item) => {
-        return (currentSum += item.unitPrice * item.quantity);
-      }, 0) *
-        (100 - discountSum)) /
-        100
-    ).toFixed(2);
+    return this.subtotal * percentageDiscount;
   }
 
   getFieldErrorMessage() {
@@ -94,11 +101,24 @@ export class CartPage {
 
     if (isCouponAlreadyApplied) {
       this.couponField.setErrors({ isCouponAlreadyApplied: true });
+
+      this.toastsService.show(
+        { body: this.getFieldErrorMessage() },
+        {
+          classname: "bg-danger text-light",
+        }
+      );
     } else {
       const isCouponValid = this.couponsService.validateCoupon(coupon);
 
       if (!isCouponValid) {
         this.couponField.setErrors({ isCouponInvalid: true });
+        this.toastsService.show(
+          { body: this.getFieldErrorMessage() },
+          {
+            classname: "bg-danger text-light",
+          }
+        );
       } else {
         this.appliedCoupons.push(coupon);
 
@@ -115,15 +135,16 @@ export class CartPage {
     }
   }
 
-  finishOrder() {
-    this.items.splice(0, this.items.length);
-    this.appliedCoupons.splice(0, this.appliedCoupons.length);
+  async addOrder() {
+    const order: IOrder = {
+      items: this.items,
+      coupons: [],
+      total: this.total,
+      subtotal: this.subtotal,
+    };
 
-    this.toastsService.show(
-      {
-        body: "Your order will be sent soon!",
-      },
-      { classname: "bg-success text-light" }
-    );
+    this.ordersService.add(order);
+    this.cartService.clear();
+    this.router.navigate(["checkout"]);
   }
 }

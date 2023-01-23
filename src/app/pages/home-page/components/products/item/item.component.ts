@@ -1,7 +1,7 @@
 import { Component, Input } from "@angular/core";
 import { CartService } from "~services/cart.service";
 import { ToastsService } from "~services/toasts.service";
-import { IProducts } from "~shared/models/IProducts";
+import { IProduct } from "~shared/models/IProduct";
 
 @Component({
   selector: "app-products-item",
@@ -9,7 +9,7 @@ import { IProducts } from "~shared/models/IProducts";
   styleUrls: ["./item.component.scss"],
 })
 export class ProductsItemComponent {
-  @Input() item: IProducts = {
+  @Input() item: IProduct = {
     id: 0,
     title: "",
     description: "",

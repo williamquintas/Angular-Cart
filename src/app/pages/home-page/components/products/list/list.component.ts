@@ -1,6 +1,6 @@
 import { Component } from "@angular/core";
 import { ProductsService } from "~services/products.service";
-import { IProducts } from "~shared/models/IProducts";
+import { IProduct } from "~shared/models/IProduct";
 
 @Component({
   selector: "app-products-list",
@@ -8,11 +8,11 @@ import { IProducts } from "~shared/models/IProducts";
   styleUrls: ["./list.component.scss"],
 })
 export class ProductsListComponent {
-  list: IProducts[] = [];
+  list: IProduct[] = [];
 
   constructor(private service: ProductsService) {}
 
   ngOnInit() {
-    this.list = this.service.getProducts() as IProducts[];
+    this.list = this.service.getProducts() as IProduct[];
   }
 }

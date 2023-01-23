@@ -1,12 +1,12 @@
 import { Injectable } from "@angular/core";
 import { BehaviorSubject } from "rxjs";
-import { ICartItems } from "~shared/models/ICartItems";
+import { ICartItem } from "~shared/models/ICartItem";
 
 @Injectable({
   providedIn: "root",
 })
 export class CartService {
-  private cartItems: ICartItems[] = [
+  private cartItems: ICartItem[] = [
     {
       id: 0,
       title: "Thriller",
@@ -17,7 +17,7 @@ export class CartService {
       quantity: 3,
     },
   ];
-  private cartItems$ = new BehaviorSubject<ICartItems[]>(this.cartItems);
+  private cartItems$ = new BehaviorSubject<ICartItem[]>(this.cartItems);
 
   constructor() {}
 
@@ -25,7 +25,7 @@ export class CartService {
     return this.cartItems$;
   }
 
-  add(item: ICartItems) {
+  add(item: ICartItem) {
     const itemToAddIndex = this.cartItems.findIndex(({ id }) => id === item.id);
 
     if (itemToAddIndex >= 0) {
@@ -37,7 +37,7 @@ export class CartService {
     this.cartItems$.next(this.cartItems);
   }
 
-  update(item: ICartItems) {
+  update(item: ICartItem) {
     const itemToUpdateIndex = this.cartItems.findIndex(
       ({ id }) => id === item.id
     );
@@ -52,5 +52,10 @@ export class CartService {
       }
       this.cartItems$.next(this.cartItems);
     }
+  }
+
+  clear() {
+    this.cartItems = [];
+    this.cartItems$.next(this.cartItems);
   }
 }
