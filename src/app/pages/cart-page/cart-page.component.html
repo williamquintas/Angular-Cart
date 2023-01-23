@@ -1,0 +1,116 @@
+<div class="container mt-2">
+  <h1>Your Shopping Cart</h1>
+
+  <ng-container *ngIf="cartItems.length > 0; else emptyList">
+    <div class="list-container">
+      <div class="list-group d-flex align-items-center">
+        <div
+          class="d-flex w-100 list-group-item card mb-3"
+          *ngFor="let item of cartItems"
+        >
+          <div class="row">
+            <div class="col-2">
+              <img
+                [src]="item.imageUrl"
+                class="img-fluid rounded"
+                [alt]="item.title"
+                style="max-height: 100px"
+              />
+            </div>
+            <div class="col-10">
+              <div class="row justify-content-between">
+                <div class="col-8">
+                  <h2 class="card-title mb-0">{{ item.title }}</h2>
+                  <small>{{ item.description }}</small>
+                </div>
+                <div class="col-2 d-flex flex-row" style="max-height: 2em">
+                  <button
+                    class="btn btn-sm btn-danger col"
+                    (click)="updateQuantity(item, item.quantity - 1)"
+                  >
+                    -
+                  </button>
+                  <input
+                    type="text"
+                    readonly
+                    [value]="item.quantity"
+                    class="form-control-plaintext col px-2 text-center"
+                  />
+                  <button
+                    class="btn btn-sm btn-primary col"
+                    (click)="updateQuantity(item, item.quantity + 1)"
+                  >
+                    +
+                  </button>
+                </div>
+                <div class="col-2 text-end">
+                  <p>{{ item.unitPrice | currency : "BRL" }}</p>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col justify-content-start">
+                  <button
+                    type="button"
+                    class="btn btn-link px-0"
+                    (click)="updateQuantity(item, 0)"
+                  >
+                    Delete
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card text-bg-light px-4 py-2">
+        <p>
+          <span class="fw-bold"> Subtotal for {{ totalItems }} item(s): </span>
+          {{ subtotal | currency : "BRL" }}
+        </p>
+
+        <div class="w-100 d-flex flex-row">
+          <div class="mb-3">
+            <label for="coupon" class="form-label">Coupon</label>
+            <input
+              type="text"
+              class="form-control"
+              name="coupon"
+              id="coupon"
+              aria-describedby="helpId"
+              placeholder="e.g. DISCOUNTXX"
+              [formControl]="couponField"
+            />
+          </div>
+          <div class="col-2 d-flex align-items-end">
+            <button
+              class="btn btn-sm btn-secondary mb-3"
+              style="height: 38px"
+              (click)="validateCoupon()"
+            >
+              Apply
+            </button>
+          </div>
+        </div>
+        <p>
+          <span class="fw-bold"> Total (with discounts): </span>
+          {{ total | currency : "BRL" }}
+        </p>
+      </div>
+      <div class="d-flex flex-row justify-content-center mt-4">
+        <button class="btn btn-primary w-50" (click)="addOrder()">
+          Go to Checkout
+        </button>
+      </div>
+    </div>
+  </ng-container>
+
+  <ng-template #emptyList>
+    <div
+      class="d-flex flex-column align-items-center justify-content-center fw-bold"
+      style="height: 25vh"
+    >
+      <p>Your cart is empty!</p>
+      <p>Please select some products.</p>
+    </div>
+  </ng-template>
+</div>

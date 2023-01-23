@@ -21,10 +21,16 @@
     "useDefineForClassFields": false,
     "lib": ["ES2022", "dom"],
     "paths": {
-      "~components/*": ["src/app/components/*"],
-      "~models/*": ["src/app/models/*"],
-      "~services/*": ["src/app/services/*"],
-      "~utils/*": ["src/app/utils/*"]
+      "~core/*": ["src/app/core/*"],
+      "~pages/*": ["src/app/pages/*"],
+      "~shared/*": ["src/app/shared/*"],
+      "~authentication/*": ["src/app/core/authentication/*"],
+      "~directives/*": ["src/app/core/directives/*"],
+      "~guards/*": ["src/app/core/guards/*"],
+      "~pipes/*": ["src/app/core/pipes/*"],
+      "~services/*": ["src/app/core/services/*"],
+      "~utils/*": ["src/app/core/utils/*"],
+      "~models/*": ["src/app/shared/models/*"]
     },
     "resolveJsonModule": true,
     "esModuleInterop": true

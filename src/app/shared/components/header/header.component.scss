@@ -1,0 +1,19 @@
+.header {
+  background-color: rgb(19, 25, 33);
+
+  .bi-vinyl-fill {
+    margin-right: 4px;
+  }
+
+  .navbar-toggler-icon {
+    font-size: 1rem;
+  }
+}
+
+@media (min-width: 768px) {
+  .navbar-collapse .navbar-nav {
+    width: 100%;
+    display: flex !important;
+    justify-content: flex-end;
+  }
+}
