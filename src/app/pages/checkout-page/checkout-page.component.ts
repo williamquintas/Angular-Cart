@@ -3,6 +3,7 @@ import { FormControl, Validators } from "@angular/forms";
 import { Router } from "@angular/router";
 import { first, map, Subject, takeUntil } from "rxjs";
 import { IOrder, PaymentMethod, PaymentMethodLabels } from "~models/IOrder";
+import { CartService } from "~services/cart.service";
 import { OrdersService } from "~services/orders.service";
 import { ToastsService } from "~services/toasts.service";
 
@@ -27,6 +28,7 @@ export class CheckoutPage {
   constructor(
     private router: Router,
     private ordersService: OrdersService,
+    private cartService: CartService,
     private toastsService: ToastsService
   ) {}
 
@@ -78,6 +80,7 @@ export class CheckoutPage {
         this.order,
         this.paymentMethodField.value as PaymentMethod
       );
+      this.cartService.clear();
       this.router.navigate(["confirmation"]);
     }
   }

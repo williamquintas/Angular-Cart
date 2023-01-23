@@ -130,7 +130,6 @@ export class CartPage {
     };
 
     this.ordersService.add(order);
-    this.cartService.clear();
     this.router.navigate(["checkout"]);
   }
 }

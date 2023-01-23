@@ -1,0 +1,24 @@
+<div class="modal-header">
+  <h4 class="modal-title" id="modal-title">Are you sure?</h4>
+  <button
+    type="button"
+    class="btn-close"
+    aria-describedby="modal-title"
+    (click)="close(false)"
+  ></button>
+</div>
+<div class="modal-body">
+  <p>You didn't finish your order, do you really want to leave page?</p>
+</div>
+<div class="modal-footer">
+  <button
+    type="button"
+    class="btn btn-outline-secondary"
+    (click)="close(false)"
+  >
+    Cancel
+  </button>
+  <button type="button" class="btn btn-danger" (click)="close(true)">
+    Confirm
+  </button>
+</div>
