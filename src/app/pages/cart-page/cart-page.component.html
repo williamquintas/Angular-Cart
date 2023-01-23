@@ -1,12 +1,12 @@
 <div class="container mt-2">
   <h1>Your Shopping Cart</h1>
 
-  <ng-container *ngIf="items.length > 0; else emptyList">
+  <ng-container *ngIf="cartItems.length > 0; else emptyList">
     <div class="list-container">
       <div class="list-group d-flex align-items-center">
         <div
           class="d-flex w-100 list-group-item card mb-3"
-          *ngFor="let item of items"
+          *ngFor="let item of cartItems"
         >
           <div class="row">
             <div class="col-2">

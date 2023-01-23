@@ -1,4 +1,4 @@
 export interface ICoupon {
-  coupon: string;
+  text: string;
   percentage: number;
 }

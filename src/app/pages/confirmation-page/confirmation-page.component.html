@@ -1,5 +1,5 @@
 <div class="container mt-2">
-  <h1>Checkout</h1>
+  <h1>Order confirmation</h1>
 
   <ng-container *ngIf="order?.items">
     <div class="list-container">
@@ -36,33 +36,23 @@
       <div class="card text-bg-light px-4 py-2">
         <p class="mb-0">
           <span class="fw-bold"> Subtotal: </span>
-          {{ order?.subtotal | currency : "BRL" }}
+          {{ order.subtotal | currency : "BRL" }}
+        </p>
+        <p class="mb-0">
+          <span class="fw-bold"> Applied discounts: </span>
+          {{ order.total - order.subtotal | currency : "BRL" }} (-{{
+            discountPercentage
+          }}%)
         </p>
         <p class="mb-0">
           <span class="fw-bold"> Total (with discounts): </span>
-          {{ order?.total | currency : "BRL" }}
+          {{ order.total | currency : "BRL" }}
         </p>
 
-        <label for="paymentMethodField">Payment method</label>
-        <select
-          class="form-select"
-          name="paymentMethodField"
-          [formControl]="paymentMethodField"
-          required
-        >
-          <option *ngFor="let option of paymentMethodOptions" [value]="option">
-            {{ PaymentMethodLabels[option] }}
-          </option>
-        </select>
-        <div class="d-flex flex-row justify-content-center mt-4">
-          <button
-            class="btn btn-primary w-50"
-            (click)="finishOrder()"
-            [disabled]="paymentMethodField.invalid"
-          >
-            Finish order
-          </button>
-        </div>
+        <p class="mb-0" *ngIf="order?.paymentMethod">
+          <span class="fw-bold mb-0">Payment method:</span>
+          {{ PaymentMethodLabels[order.paymentMethod || 0] }}
+        </p>
       </div>
     </div>
   </ng-container>

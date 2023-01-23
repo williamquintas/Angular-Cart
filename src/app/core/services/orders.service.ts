@@ -11,15 +11,12 @@ export class OrdersService {
 
   constructor() {}
 
-  add(order: IOrder): Promise<boolean> {
-    return new Promise((resolve) => {
-      this.orders.push({
-        ...order,
-        id: this.orders.length + 1,
-      });
-      this.orders$.next(this.orders);
-      resolve(true);
+  add(order: IOrder) {
+    this.orders.push({
+      ...order,
+      id: this.orders.length + 1,
     });
+    this.orders$.next(this.orders);
   }
 
   addPaymentMethodToOrder(order: IOrder, method: PaymentMethod) {
