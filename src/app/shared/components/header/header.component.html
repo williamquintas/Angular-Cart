@@ -23,16 +23,27 @@
           <li class="nav-item">
             <a
               class="nav-link"
-              routerLink="/user"
+              [routerLink]="user ? '/user' : '/login'"
               aria-label="Button with user icon"
             >
-              <i
-                class="bi bi-person-circle"
-                placement="left"
-                ngbTooltip="User Menu"
-                *ngIf="isMenuCollapsed; else userText"
-              ></i>
-              <ng-template #userText>User</ng-template>
+              <ng-container
+                *ngIf="isMenuCollapsed && user; else isUserNotLogged"
+              >
+                <span class="fw-bold">{{ user.name }}</span>
+              </ng-container>
+              <ng-template #isUserNotLogged>
+                <ng-container
+                  *ngIf="isMenuCollapsed && !user && 2; else userText"
+                >
+                  <i
+                    class="bi bi-person-circle"
+                    placement="left"
+                    ngbTooltip="User Menu"
+                    *ngIf="isMenuCollapsed; else userText"
+                  ></i>
+                </ng-container>
+              </ng-template>
+              <ng-template #userText>{{ user?.name ?? "User" }}</ng-template>
             </a>
           </li>
           <li class="nav-item">
@@ -40,7 +51,6 @@
               class="nav-link"
               aria-label="Button with cart icon"
               routerLink="/cart"
-              (click)="toggleCart()"
             >
               <i
                 class="bi bi-cart3"

@@ -1,23 +1,24 @@
-import { Component } from "@angular/core";
+import { ChangeDetectionStrategy, Component } from "@angular/core";
+import { Router } from "@angular/router";
 import { Subject, takeUntil } from "rxjs";
 import { IUser } from "~models/IUser";
 import { AuthenticationService } from "~services/authentication.service";
-import storeConfig from "~shared/data/config.json";
 
 @Component({
-  selector: "app-header",
-  templateUrl: "./header.component.html",
-  styleUrls: ["./header.component.scss"],
+  selector: "app-user-page",
+  templateUrl: "./user-page.component.html",
+  styleUrls: ["./user-page.component.scss"],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class HeaderComponent {
+export class UserPage {
   isComponentDestroyed$ = new Subject<boolean>();
-  name = storeConfig.name ?? "Store";
-  icon = storeConfig.icon ?? "bi-shop";
 
-  isMenuCollapsed = true;
   user!: IUser | null;
 
-  constructor(private authenticationService: AuthenticationService) {}
+  constructor(
+    private router: Router,
+    private authenticationService: AuthenticationService
+  ) {}
 
   ngOnInit() {
     this.authenticationService
@@ -31,5 +32,10 @@ export class HeaderComponent {
   ngOnDestroy() {
     this.isComponentDestroyed$.next(true);
     this.isComponentDestroyed$.complete();
+  }
+
+  logout() {
+    this.authenticationService.logout();
+    this.router.navigate(["login"]);
   }
 }
