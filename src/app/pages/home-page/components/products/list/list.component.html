@@ -1,7 +1,23 @@
 <div class="album py-5 bg-light">
   <div class="container">
+    <ngb-pagination
+      class="d-flex justify-content-end"
+      size="sm"
+      [collectionSize]="totalCount"
+      [(page)]="parameters.page"
+      [pageSize]="parameters.pageSize"
+      [boundaryLinks]="false"
+      [directionLinks]="true"
+      [ellipses]="true"
+      (pageChange)="onPageChange($event)"
+    ></ngb-pagination>
+
     <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-      <app-products-item class="col" *ngFor="let item of list" [item]="item" />
+      <app-products-item
+        class="col"
+        *ngFor="let item of list"
+        [item]="item"
+      ></app-products-item>
     </div>
   </div>
 </div>

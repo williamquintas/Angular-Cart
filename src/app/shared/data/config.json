@@ -1,4 +1,5 @@
 {
   "name": "Music Store",
-  "icon": "bi-vinyl-fill"
+  "icon": "bi-vinyl-fill",
+  "serverURL": "http://localhost:3000"
 }

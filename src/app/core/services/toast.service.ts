@@ -1,11 +1,11 @@
 import { Injectable } from "@angular/core";
 import { BehaviorSubject } from "rxjs";
-import { IToast } from "~shared/models/IToast";
+import { IToast } from "~shared/interfaces";
 
 @Injectable({
   providedIn: "root",
 })
-export class ToastsService {
+export class ToastService {
   private toasts: IToast[] = [];
   toasts$ = new BehaviorSubject<IToast[]>(this.toasts);
 

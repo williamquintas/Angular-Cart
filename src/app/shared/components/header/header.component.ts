@@ -1,8 +1,8 @@
 import { Component } from "@angular/core";
 import { Subject, takeUntil } from "rxjs";
-import { IUser } from "~models/IUser";
-import { AuthenticationService } from "~services/authentication.service";
+import { AuthenticationService } from "~core/services";
 import storeConfig from "~shared/data/config.json";
+import { IUser } from "~shared/interfaces";
 
 @Component({
   selector: "app-header",

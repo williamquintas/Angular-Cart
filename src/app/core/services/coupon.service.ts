@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { BehaviorSubject } from "rxjs";
-import { ICoupon } from "~models/ICoupon";
+import { ICoupon } from "~shared/interfaces";
 
 const VALID_COUPONS: ICoupon[] = [
   { text: "DISCOUNT10", percentage: 10 },
@@ -11,7 +11,7 @@ const VALID_COUPONS: ICoupon[] = [
 @Injectable({
   providedIn: "root",
 })
-export class CouponsService {
+export class CouponService {
   private appliedCoupons: ICoupon[] = [];
   appliedCoupons$ = new BehaviorSubject<ICoupon[]>([]);
 
