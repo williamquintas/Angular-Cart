@@ -4,6 +4,7 @@ import { ReactiveFormsModule } from "@angular/forms";
 import { RouterModule } from "@angular/router";
 import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
 import { SharedModule } from "~shared/shared.module";
+import { PagesRoutingModule } from "./pages-routing.module";
 
 import { CartPage } from "./cart-page/cart-page.component";
 import { CheckoutPage } from "./checkout-page/checkout-page.component";
@@ -12,6 +13,7 @@ import { ProductsItemComponent } from "./home-page/components/products/item/item
 import { ProductsListComponent } from "./home-page/components/products/list/list.component";
 import { HomePage } from "./home-page/home-page.component";
 import { LoginPage } from "./login-page/login-page.component";
+import { PagesComponent } from "./pages.component";
 import { UserPage } from "./user-page/user-page.component";
 
 @NgModule({
@@ -24,6 +26,7 @@ import { UserPage } from "./user-page/user-page.component";
     ProductsListComponent,
     ProductsItemComponent,
     LoginPage,
+    PagesComponent,
   ],
   imports: [
     CommonModule,
@@ -31,6 +34,8 @@ import { UserPage } from "./user-page/user-page.component";
     RouterModule,
     ReactiveFormsModule,
     NgbModule,
+    PagesRoutingModule,
   ],
+  exports: [PagesComponent],
 })
 export class PagesModule {}

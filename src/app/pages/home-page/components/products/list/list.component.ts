@@ -1,7 +1,11 @@
 import { Component } from "@angular/core";
 import { Subject, takeUntil } from "rxjs";
-import { ProductsService } from "~services/products.service";
-import { IProduct } from "~shared/models/IProduct";
+import { ProductService } from "~core/services";
+import {
+  IProduct,
+  IQueryParameters,
+  PageSizeOptions,
+} from "~shared/interfaces";
 
 @Component({
   selector: "app-products-list",
@@ -11,20 +15,36 @@ import { IProduct } from "~shared/models/IProduct";
 export class ProductsListComponent {
   isComponentDestroyed$ = new Subject<boolean>();
   list: IProduct[] = [];
+  totalCount = 0;
+  PageSizeOptions = PageSizeOptions;
+  parameters: IQueryParameters = {
+    page: 1,
+    pageSize: PageSizeOptions[0],
+  };
 
-  constructor(private service: ProductsService) {}
+  constructor(private service: ProductService) {}
 
   ngOnInit() {
-    this.service
-      .getProducts()
-      .pipe(takeUntil(this.isComponentDestroyed$))
-      .subscribe((products) => {
-        this.list = products;
-      });
+    this.loadPrograms();
   }
 
   ngOnDestroy() {
     this.isComponentDestroyed$.next(true);
     this.isComponentDestroyed$.complete();
+  }
+
+  loadPrograms() {
+    this.service
+      .getAll(this.parameters)
+      .pipe(takeUntil(this.isComponentDestroyed$))
+      .subscribe(({ data, totalCount }) => {
+        this.list = data;
+        this.totalCount = totalCount;
+      });
+  }
+
+  onPageChange(page: number) {
+    this.parameters = { ...this.parameters, page };
+    this.loadPrograms();
   }
 }

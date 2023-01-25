@@ -1,11 +1,11 @@
 import { Injectable } from "@angular/core";
 import { BehaviorSubject, Observable } from "rxjs";
-import { IOrder, PaymentMethod } from "~models/IOrder";
+import { IOrder, PaymentMethod } from "~shared/interfaces";
 
 @Injectable({
   providedIn: "root",
 })
-export class OrdersService {
+export class OrderService {
   private orders: IOrder[] = [];
   orders$ = new BehaviorSubject<IOrder[]>([]);
 

@@ -1,7 +1,7 @@
 import { Component } from "@angular/core";
 import { first, map, Subject, takeUntil } from "rxjs";
-import { OrdersService } from "~services/orders.service";
-import { IOrder, PaymentMethodLabels } from "~shared/models/IOrder";
+import { OrderService } from "~core/services";
+import { IOrder, PaymentMethodLabels } from "~shared/interfaces";
 
 @Component({
   selector: "app-confirmation-page",
@@ -15,11 +15,10 @@ export class ConfirmationPage {
 
   order!: IOrder;
 
-  constructor(private ordersService: OrdersService) {}
+  constructor(private OrderService: OrderService) {}
 
   ngOnInit() {
-    this.ordersService
-      .getAll()
+    this.OrderService.getAll()
       .pipe(
         first(),
         takeUntil(this.isComponentDestroyed$),

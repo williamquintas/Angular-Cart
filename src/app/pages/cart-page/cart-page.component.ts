@@ -2,13 +2,13 @@ import { ChangeDetectionStrategy, Component } from "@angular/core";
 import { FormControl } from "@angular/forms";
 import { Router } from "@angular/router";
 import { combineLatest, Subject, takeUntil } from "rxjs";
-import { CartService } from "~services/cart.service";
-import { CouponsService } from "~services/coupons.service";
-import { OrdersService } from "~services/orders.service";
-import { ToastsService } from "~services/toasts.service";
-import { ICartItem } from "~shared/models/ICartItem";
-import { ICoupon } from "../../shared/models/ICoupon";
-import { IOrder } from "../../shared/models/IOrder";
+import {
+  CartService,
+  CouponService,
+  OrderService,
+  ToastService,
+} from "~core/services";
+import { ICartItem, ICoupon, IOrder } from "~shared/interfaces";
 
 @Component({
   selector: "app-cart-page",
@@ -26,13 +26,13 @@ export class CartPage {
   constructor(
     private router: Router,
     private cartService: CartService,
-    private ordersService: OrdersService,
-    private couponsService: CouponsService,
-    private toastsService: ToastsService
+    private OrderService: OrderService,
+    private CouponService: CouponService,
+    private ToastService: ToastService
   ) {}
 
   ngOnInit() {
-    combineLatest([this.cartService.getAll(), this.couponsService.getAll()])
+    combineLatest([this.cartService.getAll(), this.CouponService.getAll()])
       .pipe(takeUntil(this.isComponentDestroyed$))
       .subscribe(([cartItems, appliedCoupons]) => {
         this.cartItems = cartItems;
@@ -50,7 +50,7 @@ export class CartPage {
       this.cartService.update({ ...item, quantity });
 
       if (quantity === 0) {
-        this.toastsService.show(
+        this.ToastService.show(
           { body: "Item deleted" },
           {
             classname: "bg-warn text-light",
@@ -98,11 +98,11 @@ export class CartPage {
   validateCoupon() {
     const coupon = this.couponField.value?.toLocaleUpperCase() ?? "";
 
-    const couponError = this.couponsService.applyCoupon(coupon);
+    const couponError = this.CouponService.applyCoupon(coupon);
 
     if (couponError) {
       this.couponField.setErrors({ [couponError]: true });
-      this.toastsService.show(
+      this.ToastService.show(
         { body: this.getFieldErrorMessage() },
         {
           classname: "bg-danger text-light",
@@ -112,7 +112,7 @@ export class CartPage {
       this.couponField.setValue("");
       this.couponField.setErrors(null);
 
-      this.toastsService.show(
+      this.ToastService.show(
         {
           body: "Coupon applied",
         },
@@ -129,7 +129,7 @@ export class CartPage {
       subtotal: this.subtotal,
     };
 
-    this.ordersService.add(order);
+    this.OrderService.add(order);
     this.router.navigate(["checkout"]);
   }
 }

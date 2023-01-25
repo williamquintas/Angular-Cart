@@ -1,7 +1,6 @@
 import { Component, Input } from "@angular/core";
-import { CartService } from "~services/cart.service";
-import { ToastsService } from "~services/toasts.service";
-import { IProduct } from "~shared/models/IProduct";
+import { CartService, ToastService } from "~core/services";
+import { IProduct } from "~shared/interfaces";
 
 @Component({
   selector: "app-products-item",
@@ -19,12 +18,12 @@ export class ProductsItemComponent {
 
   constructor(
     private cartService: CartService,
-    private toastsService: ToastsService
+    private ToastService: ToastService
   ) {}
 
   addToCart() {
     const cartItem = { ...this.item, quantity: 1 };
     this.cartService.add(cartItem);
-    this.toastsService.show({ body: "Product added to cart!" });
+    this.ToastService.show({ body: "Product added to cart!" });
   }
 }

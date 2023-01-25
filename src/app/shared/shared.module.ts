@@ -1,6 +1,5 @@
 import { CommonModule } from "@angular/common";
 import { NgModule } from "@angular/core";
-import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { RouterModule } from "@angular/router";
 import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
 
@@ -16,13 +15,7 @@ import { ToastComponent } from "~shared/components/toast/toast.component";
     ToastComponent,
     CanLeaveModal,
   ],
-  imports: [
-    CommonModule,
-    FormsModule,
-    RouterModule,
-    NgbModule,
-    ReactiveFormsModule,
-  ],
+  imports: [CommonModule, RouterModule, NgbModule],
   exports: [FooterComponent, HeaderComponent, ToastComponent],
 })
 export class SharedModule {}

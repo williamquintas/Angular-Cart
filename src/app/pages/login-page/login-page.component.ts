@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component } from "@angular/core";
 import { Router } from "@angular/router";
-import { AuthenticationService } from "~services/authentication.service";
+import { AuthenticationService } from "~core/services";
 
 @Component({
   selector: "app-login-page",

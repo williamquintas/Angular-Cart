@@ -1,5 +1,5 @@
-import { ICartItem } from "./ICartItem";
-import { ICoupon } from "./ICoupon";
+import { ICartItem } from "./CartItem.interface";
+import { ICoupon } from "./Coupon.interface";
 
 export interface IOrder {
   id?: number;

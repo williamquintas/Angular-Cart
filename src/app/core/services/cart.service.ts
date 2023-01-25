@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { BehaviorSubject } from "rxjs";
-import { ICartItem } from "~shared/models/ICartItem";
+import { ICartItem } from "~shared/interfaces";
 
 @Injectable({
   providedIn: "root",

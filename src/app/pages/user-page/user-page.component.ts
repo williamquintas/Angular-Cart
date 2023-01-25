@@ -1,8 +1,8 @@
 import { ChangeDetectionStrategy, Component } from "@angular/core";
 import { Router } from "@angular/router";
 import { Subject, takeUntil } from "rxjs";
-import { IUser } from "~models/IUser";
-import { AuthenticationService } from "~services/authentication.service";
+import { AuthenticationService } from "~core/services";
+import { IUser } from "~shared/interfaces";
 
 @Component({
   selector: "app-user-page",

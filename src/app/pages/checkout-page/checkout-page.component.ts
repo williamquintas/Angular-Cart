@@ -2,10 +2,8 @@ import { Component } from "@angular/core";
 import { FormControl, Validators } from "@angular/forms";
 import { Router } from "@angular/router";
 import { first, map, Subject, takeUntil } from "rxjs";
-import { IOrder, PaymentMethod, PaymentMethodLabels } from "~models/IOrder";
-import { CartService } from "~services/cart.service";
-import { OrdersService } from "~services/orders.service";
-import { ToastsService } from "~services/toasts.service";
+import { CartService, OrderService, ToastService } from "~core/services";
+import { IOrder, PaymentMethod, PaymentMethodLabels } from "~shared/interfaces";
 
 @Component({
   selector: "app-checkout-page",
@@ -27,14 +25,13 @@ export class CheckoutPage {
 
   constructor(
     private router: Router,
-    private ordersService: OrdersService,
+    private OrderService: OrderService,
     private cartService: CartService,
-    private toastsService: ToastsService
+    private ToastService: ToastService
   ) {}
 
   ngOnInit() {
-    this.ordersService
-      .getAll()
+    this.OrderService.getAll()
       .pipe(
         first(),
         takeUntil(this.isComponentDestroyed$),
@@ -66,7 +63,7 @@ export class CheckoutPage {
 
   finishOrder() {
     if (this.paymentMethodField.invalid) {
-      this.toastsService.show(
+      this.ToastService.show(
         { body: this.getFieldErrorMessage() },
         { classname: "bg-danger text-light" }
       );
@@ -76,7 +73,7 @@ export class CheckoutPage {
       this.paymentMethodField.valid &&
       this.paymentMethodField.value
     ) {
-      this.ordersService.addPaymentMethodToOrder(
+      this.OrderService.addPaymentMethodToOrder(
         this.order,
         this.paymentMethodField.value as PaymentMethod
       );
