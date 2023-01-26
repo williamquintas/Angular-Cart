@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component } from "@angular/core";
 import { Router } from "@angular/router";
 import { Subject, takeUntil } from "rxjs";
-import { AuthenticationService } from "~core/services";
+import { AuthenticationService, ErrorService } from "~core/services";
 import { IUser } from "~shared/interfaces";
 
 @Component({
@@ -17,15 +17,21 @@ export class UserPage {
 
   constructor(
     private router: Router,
-    private authenticationService: AuthenticationService
+    private authenticationService: AuthenticationService,
+    private errorService: ErrorService
   ) {}
 
   ngOnInit() {
     this.authenticationService
       .getUser()
       .pipe(takeUntil(this.isComponentDestroyed$))
-      .subscribe((user) => {
-        this.user = user;
+      .subscribe({
+        next: (user) => {
+          this.user = user;
+        },
+        error: (error) => {
+          this.errorService.open(error);
+        },
       });
   }
 

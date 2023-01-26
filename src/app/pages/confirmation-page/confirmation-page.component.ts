@@ -1,6 +1,6 @@
 import { Component } from "@angular/core";
 import { first, map, Subject, takeUntil } from "rxjs";
-import { OrderService } from "~core/services";
+import { ErrorService, OrderService } from "~core/services";
 import { IOrder, PaymentMethodLabels } from "~shared/interfaces";
 
 @Component({
@@ -15,10 +15,14 @@ export class ConfirmationPage {
 
   order!: IOrder;
 
-  constructor(private OrderService: OrderService) {}
+  constructor(
+    private errorService: ErrorService,
+    private orderService: OrderService
+  ) {}
 
   ngOnInit() {
-    this.OrderService.getAll()
+    this.orderService
+      .getAll()
       .pipe(
         first(),
         takeUntil(this.isComponentDestroyed$),
@@ -27,10 +31,15 @@ export class ConfirmationPage {
           return ordersList.pop();
         })
       )
-      .subscribe((order) => {
-        if (order) {
-          this.order = order;
-        }
+      .subscribe({
+        next: (order) => {
+          if (order) {
+            this.order = order;
+          }
+        },
+        error: (error) => {
+          this.errorService.open(error);
+        },
       });
   }
 

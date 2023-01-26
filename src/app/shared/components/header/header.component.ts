@@ -1,6 +1,6 @@
 import { Component } from "@angular/core";
 import { Subject, takeUntil } from "rxjs";
-import { AuthenticationService } from "~core/services";
+import { AuthenticationService, ErrorService } from "~core/services";
 import storeConfig from "~shared/data/config.json";
 import { IUser } from "~shared/interfaces";
 
@@ -17,14 +17,22 @@ export class HeaderComponent {
   isMenuCollapsed = true;
   user!: IUser | null;
 
-  constructor(private authenticationService: AuthenticationService) {}
+  constructor(
+    private authenticationService: AuthenticationService,
+    private errorService: ErrorService
+  ) {}
 
   ngOnInit() {
     this.authenticationService
       .getUser()
       .pipe(takeUntil(this.isComponentDestroyed$))
-      .subscribe((user) => {
-        this.user = user;
+      .subscribe({
+        next: (user) => {
+          this.user = user;
+        },
+        error: (error) => {
+          this.errorService.open(error);
+        },
       });
   }
 

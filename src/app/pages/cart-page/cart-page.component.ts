@@ -5,6 +5,7 @@ import { combineLatest, Subject, takeUntil } from "rxjs";
 import {
   CartService,
   CouponService,
+  ErrorService,
   OrderService,
   ToastService,
 } from "~core/services";
@@ -26,17 +27,23 @@ export class CartPage {
   constructor(
     private router: Router,
     private cartService: CartService,
-    private OrderService: OrderService,
-    private CouponService: CouponService,
-    private ToastService: ToastService
+    private couponService: CouponService,
+    private errorService: ErrorService,
+    private orderService: OrderService,
+    private toastService: ToastService
   ) {}
 
   ngOnInit() {
-    combineLatest([this.cartService.getAll(), this.CouponService.getAll()])
+    combineLatest([this.cartService.getAll(), this.couponService.getAll()])
       .pipe(takeUntil(this.isComponentDestroyed$))
-      .subscribe(([cartItems, appliedCoupons]) => {
-        this.cartItems = cartItems;
-        this.appliedCoupons = appliedCoupons;
+      .subscribe({
+        next: ([cartItems, appliedCoupons]) => {
+          this.cartItems = cartItems;
+          this.appliedCoupons = appliedCoupons;
+        },
+        error: (error) => {
+          this.errorService.open(error);
+        },
       });
   }
 
@@ -50,7 +57,7 @@ export class CartPage {
       this.cartService.update({ ...item, quantity });
 
       if (quantity === 0) {
-        this.ToastService.show(
+        this.toastService.show(
           { body: "Item deleted" },
           {
             classname: "bg-warn text-light",
@@ -98,11 +105,11 @@ export class CartPage {
   validateCoupon() {
     const coupon = this.couponField.value?.toLocaleUpperCase() ?? "";
 
-    const couponError = this.CouponService.applyCoupon(coupon);
+    const couponError = this.couponService.applyCoupon(coupon);
 
     if (couponError) {
       this.couponField.setErrors({ [couponError]: true });
-      this.ToastService.show(
+      this.toastService.show(
         { body: this.getFieldErrorMessage() },
         {
           classname: "bg-danger text-light",
@@ -112,7 +119,7 @@ export class CartPage {
       this.couponField.setValue("");
       this.couponField.setErrors(null);
 
-      this.ToastService.show(
+      this.toastService.show(
         {
           body: "Coupon applied",
         },
@@ -129,7 +136,7 @@ export class CartPage {
       subtotal: this.subtotal,
     };
 
-    this.OrderService.add(order);
+    this.orderService.add(order);
     this.router.navigate(["checkout"]);
   }
 }

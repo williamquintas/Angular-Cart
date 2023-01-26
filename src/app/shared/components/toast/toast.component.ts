@@ -1,5 +1,5 @@
 import { Component } from "@angular/core";
-import { ToastService } from "~core/services";
+import { ErrorService, ToastService } from "~core/services";
 import { IToast } from "~shared/interfaces";
 
 @Component({
@@ -10,15 +10,23 @@ import { IToast } from "~shared/interfaces";
 export class ToastComponent {
   toasts: IToast[] = [];
 
-  constructor(private ToastService: ToastService) {}
+  constructor(
+    private toastService: ToastService,
+    private errorService: ErrorService
+  ) {}
 
   ngOnInit() {
-    this.ToastService.getAll().subscribe((toasts) => {
-      this.toasts = toasts;
+    this.toastService.getAll().subscribe({
+      next: (toasts) => {
+        this.toasts = toasts;
+      },
+      error: (error) => {
+        this.errorService.open(error);
+      },
     });
   }
 
   remove(toast: IToast) {
-    this.ToastService.remove(toast);
+    this.toastService.remove(toast);
   }
 }

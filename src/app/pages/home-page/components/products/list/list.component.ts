@@ -1,6 +1,6 @@
 import { Component } from "@angular/core";
 import { Subject, takeUntil } from "rxjs";
-import { ProductService } from "~core/services";
+import { ErrorService, ProductService } from "~core/services";
 import {
   IProduct,
   IQueryParameters,
@@ -22,7 +22,10 @@ export class ProductsListComponent {
     pageSize: PageSizeOptions[0],
   };
 
-  constructor(private service: ProductService) {}
+  constructor(
+    private productService: ProductService,
+    private errorService: ErrorService
+  ) {}
 
   ngOnInit() {
     this.loadPrograms();
@@ -34,12 +37,17 @@ export class ProductsListComponent {
   }
 
   loadPrograms() {
-    this.service
+    this.productService
       .getAll(this.parameters)
       .pipe(takeUntil(this.isComponentDestroyed$))
-      .subscribe(({ data, totalCount }) => {
-        this.list = data;
-        this.totalCount = totalCount;
+      .subscribe({
+        next: ({ data, totalCount }) => {
+          this.list = data;
+          this.totalCount = totalCount;
+        },
+        error: (err: Error) => {
+          this.errorService.open({ ...err, name: err.name ?? "Error" });
+        },
       });
   }
 

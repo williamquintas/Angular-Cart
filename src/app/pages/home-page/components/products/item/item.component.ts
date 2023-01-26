@@ -18,12 +18,12 @@ export class ProductsItemComponent {
 
   constructor(
     private cartService: CartService,
-    private ToastService: ToastService
+    private toastService: ToastService
   ) {}
 
   addToCart() {
     const cartItem = { ...this.item, quantity: 1 };
     this.cartService.add(cartItem);
-    this.ToastService.show({ body: "Product added to cart!" });
+    this.toastService.show({ body: "Product added to cart!" });
   }
 }
