@@ -1,5 +1,6 @@
 {
   "name": "Music Store",
   "icon": "bi-vinyl-fill",
-  "serverURL": "http://localhost:3000"
+  "serverURL": "http://localhost:3000",
+  "authenticationURL": "https://dummyjson.com"
 }

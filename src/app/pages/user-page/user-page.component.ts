@@ -13,7 +13,7 @@ import { IUser } from "~shared/interfaces";
 export class UserPage {
   isComponentDestroyed$ = new Subject<boolean>();
 
-  user!: IUser | null;
+  user!: IUser;
 
   constructor(
     private router: Router,
@@ -27,7 +27,9 @@ export class UserPage {
       .pipe(takeUntil(this.isComponentDestroyed$))
       .subscribe({
         next: (user) => {
-          this.user = user;
+          if (user) {
+            this.user = user;
+          }
         },
         error: (error) => {
           this.errorService.open(error);

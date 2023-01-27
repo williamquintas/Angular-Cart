@@ -7,7 +7,7 @@ import { CanLeaveModal } from "~shared/components/can-leave/can-leave.component"
 import { FooterComponent } from "~shared/components/footer/footer.component";
 import { HeaderComponent } from "~shared/components/header/header.component";
 import { ToastComponent } from "~shared/components/toast/toast.component";
-import { ErrorModalComponent } from './components/error-modal/error-modal.component';
+import { ErrorModalComponent } from "./components/error-modal/error-modal.component";
 
 @NgModule({
   declarations: [
@@ -18,6 +18,11 @@ import { ErrorModalComponent } from './components/error-modal/error-modal.compon
     ErrorModalComponent,
   ],
   imports: [CommonModule, RouterModule, NgbModule],
-  exports: [FooterComponent, HeaderComponent, ToastComponent],
+  exports: [
+    ErrorModalComponent,
+    FooterComponent,
+    HeaderComponent,
+    ToastComponent,
+  ],
 })
 export class SharedModule {}

@@ -18,8 +18,18 @@ export class HttpInterceptorService implements HttpInterceptor {
     request: HttpRequest<unknown>,
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
+    const { authenticationURL, serverURL } = config;
+    const token = localStorage.getItem("token");
+
     return next.handle(
-      request.clone({ url: `${config.serverURL}${request.url}` })
+      request.clone({
+        url: `${
+          request.url.startsWith("/auth/login") ? authenticationURL : serverURL
+        }${request.url}`,
+        setHeaders: {
+          Authorization: token ? `Bearer ${token}` : "",
+        },
+      })
     );
   }
 }

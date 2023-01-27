@@ -1,7 +1,13 @@
 export interface IUser {
   id: number;
-  name: string;
-  role: UserRole;
+  email: string;
+  firstName: string;
+  lastName: string;
+  username: string;
+  gender: string;
+  image: string;
+  token?: string;
+  role?: UserRole;
 }
 
 export enum UserRole {

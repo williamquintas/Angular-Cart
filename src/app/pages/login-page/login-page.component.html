@@ -1,13 +1,18 @@
-<div class="container bg-light my-4 px-4 py-2" style="max-width: 792px">
+<form
+  [formGroup]="form"
+  class="container bg-light my-4 px-4 py-2"
+  style="max-width: 792px"
+>
   <h1>Login</h1>
   <div class="mb-3">
-    <label for="coupon" class="form-label">Email</label>
+    <label for="coupon" class="form-label">Username</label>
     <input
-      type="email"
+      type="text"
       class="form-control"
-      name="email"
-      id="email"
-      aria-describedby="email"
+      id="username"
+      name="username"
+      formControlName="username"
+      aria-describedby="username"
       placeholder="john.doe@email.com"
     />
   </div>
@@ -16,8 +21,9 @@
     <input
       type="password"
       class="form-control"
-      name="password"
       id="password"
+      name="password"
+      formControlName="password"
       aria-describedby="password"
     />
   </div>
@@ -26,4 +32,4 @@
       Login
     </button>
   </div>
-</div>
+</form>

@@ -8,12 +8,12 @@ import { ErrorModalComponent } from "../../shared/components/error-modal/error-m
 export class ErrorService {
   constructor(private modalService: NgbModal) {}
 
-  open(error: Error): void {
-    const { name, message } = error;
+  open(err: Error & { error?: { message?: string } }): void {
+    const { name, message, error } = err;
     const modalReference = this.modalService.open(ErrorModalComponent);
     const { componentInstance } = modalReference;
     componentInstance.title = name;
-    componentInstance.message = message;
-    console.error(error);
+    componentInstance.message = error?.message ?? message;
+    console.error(err);
   }
 }

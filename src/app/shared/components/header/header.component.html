@@ -29,7 +29,9 @@
               <ng-container
                 *ngIf="isMenuCollapsed && user; else isUserNotLogged"
               >
-                <span class="fw-bold">{{ user.name }}</span>
+                <span class="fw-bold"
+                  >{{ user.firstName }} {{ user.lastName }}</span
+                >
               </ng-container>
               <ng-template #isUserNotLogged>
                 <ng-container
@@ -43,7 +45,10 @@
                   ></i>
                 </ng-container>
               </ng-template>
-              <ng-template #userText>{{ user?.name ?? "User" }}</ng-template>
+              <ng-template #userText
+                >{{ user?.firstName ?? "User" }}
+                {{ user?.lastName }}</ng-template
+              >
             </a>
           </li>
           <li class="nav-item">
