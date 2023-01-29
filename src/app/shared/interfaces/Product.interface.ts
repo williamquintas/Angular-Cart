@@ -1,4 +1,6 @@
-export interface IProduct {
+import { IQueryParameters } from "./Api.interface";
+
+interface IProduct {
   id: number;
   title: string;
   category: string;
@@ -7,14 +9,25 @@ export interface IProduct {
   unitPrice: number;
 }
 
-export enum ProductCategory {
+enum ProductCategory {
   ROCK = 1,
   POP = 2,
   OTHERS = 3,
 }
 
-export const ProductCategoryLabels: { [key: number]: string } = {
+const ProductCategoryLabels: { [key: number]: string } = {
   [ProductCategory.ROCK]: "Rock",
   [ProductCategory.POP]: "Pop",
   [ProductCategory.OTHERS]: "Others",
+};
+
+interface IProductQueryParameters extends IQueryParameters {
+  category?: string;
+}
+
+export {
+  IProduct,
+  ProductCategory,
+  ProductCategoryLabels,
+  IProductQueryParameters,
 };

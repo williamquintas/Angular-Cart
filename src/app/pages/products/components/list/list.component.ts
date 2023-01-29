@@ -1,5 +1,6 @@
-import { Component } from "@angular/core";
-import { Subject, takeUntil } from "rxjs";
+import { Component, Input } from "@angular/core";
+import { FormControl, FormGroup } from "@angular/forms";
+import { debounceTime, Subject, takeUntil } from "rxjs";
 import { ErrorService, ProductService } from "~core/services";
 import {
   IProduct,
@@ -13,14 +14,22 @@ import {
   styleUrls: ["./list.component.scss"],
 })
 export class ProductsListComponent {
+  @Input() category!: string;
+
   isComponentDestroyed$ = new Subject<boolean>();
   list: IProduct[] = [];
   totalCount = 0;
+
   PageSizeOptions = PageSizeOptions;
   parameters: IQueryParameters = {
     page: 1,
     pageSize: PageSizeOptions[0],
   };
+
+  hasInputChanged$ = new Subject<void>();
+  form = new FormGroup({
+    search: new FormControl("", []),
+  });
 
   constructor(
     private productService: ProductService,
@@ -29,6 +38,16 @@ export class ProductsListComponent {
 
   ngOnInit() {
     this.loadPrograms();
+
+    this.hasInputChanged$
+      .pipe(debounceTime(300), takeUntil(this.isComponentDestroyed$))
+      .subscribe({ next: () => this.loadPrograms() });
+  }
+
+  ngOnChanges(changes: { category: string }) {
+    if (changes.category) {
+      this.loadPrograms();
+    }
   }
 
   ngOnDestroy() {
@@ -37,8 +56,15 @@ export class ProductsListComponent {
   }
 
   loadPrograms() {
+    const searchInput = this.form.get("search")?.value ?? undefined;
+    const parameters = {
+      ...this.parameters,
+      search: searchInput,
+      ...(this.category ? { category: this.category } : {}),
+    };
+
     this.productService
-      .getAll(this.parameters)
+      .getAll(parameters)
       .pipe(takeUntil(this.isComponentDestroyed$))
       .subscribe({
         next: ({ data, totalCount }) => {
@@ -54,5 +80,9 @@ export class ProductsListComponent {
   onPageChange(page: number) {
     this.parameters = { ...this.parameters, page };
     this.loadPrograms();
+  }
+
+  onSearchInputChange() {
+    this.hasInputChanged$.next();
   }
 }

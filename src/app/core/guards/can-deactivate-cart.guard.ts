@@ -7,8 +7,8 @@ import {
 } from "@angular/router";
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import { mergeMap, Observable } from "rxjs";
+import { CartService } from "~core/services";
 import { CanLeaveModal } from "~shared/components/can-leave/can-leave.component";
-import { CartService } from "../services";
 
 @Injectable({
   providedIn: "root",

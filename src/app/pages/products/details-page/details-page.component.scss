@@ -1,0 +1,7 @@
+@import "src/app/app.component.scss";
+
+@media (min-width: 768px) and (max-width: 979px) {
+  #product-details-page {
+    height: calc(100vh - $header-height - $footer-height);
+  }
+}

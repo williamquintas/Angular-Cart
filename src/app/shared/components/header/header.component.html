@@ -32,7 +32,7 @@
             <a
               *ngFor="let category of productCategoryOptions"
               ngbDropdownItem
-              [routerLink]="['.']"
+              [routerLink]="['products', 'list']"
               [queryParams]="{ category: ProductCategoryLabels[category] }"
               >{{ ProductCategoryLabels[category] }}</a
             >
