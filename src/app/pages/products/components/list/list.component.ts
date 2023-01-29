@@ -37,16 +37,16 @@ export class ProductsListComponent {
   ) {}
 
   ngOnInit() {
-    this.loadPrograms();
+    this.loadProducts();
 
     this.hasInputChanged$
       .pipe(debounceTime(300), takeUntil(this.isComponentDestroyed$))
-      .subscribe({ next: () => this.loadPrograms() });
+      .subscribe({ next: () => this.loadProducts() });
   }
 
   ngOnChanges(changes: { category: string }) {
     if (changes.category) {
-      this.loadPrograms();
+      this.loadProducts();
     }
   }
 
@@ -55,7 +55,7 @@ export class ProductsListComponent {
     this.isComponentDestroyed$.complete();
   }
 
-  loadPrograms() {
+  loadProducts() {
     const searchInput = this.form.get("search")?.value ?? undefined;
     const parameters = {
       ...this.parameters,
@@ -79,10 +79,10 @@ export class ProductsListComponent {
 
   onPageChange(page: number) {
     this.parameters = { ...this.parameters, page };
-    this.loadPrograms();
+    this.loadProducts();
   }
 
-  onSearchInputChange() {
+  onFormChange() {
     this.hasInputChanged$.next();
   }
 }
