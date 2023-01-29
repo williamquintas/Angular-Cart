@@ -21,7 +21,10 @@ export class ProductsItemComponent {
     private toastService: ToastService
   ) {}
 
-  addToCart() {
+  addToCart(event: Event): void {
+    event?.preventDefault();
+    event?.stopPropagation();
+
     const cartItem = { ...this.item, quantity: 1 };
     this.cartService.add(cartItem);
     this.toastService.show({ body: "Product added to cart!" });

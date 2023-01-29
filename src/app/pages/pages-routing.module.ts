@@ -1,11 +1,10 @@
 import { NgModule } from "@angular/core";
-import { RouterModule, Routes } from "@angular/router";
+import { PreloadAllModules, RouterModule, Routes } from "@angular/router";
 
 import { CanDeactivateCartGuard, IsLoggedInGuard } from "~core/guards";
 import { CartPage } from "~pages/cart-page/cart-page.component";
 import { CheckoutPage } from "~pages/checkout-page/checkout-page.component";
 import { ConfirmationPage } from "~pages/confirmation-page/confirmation-page.component";
-import { HomePage } from "~pages/home-page/home-page.component";
 import storeConfig from "~shared/data/config.json";
 import { LoginPage } from "./login-page/login-page.component";
 import { UserPage } from "./user-page/user-page.component";
@@ -13,8 +12,10 @@ import { UserPage } from "./user-page/user-page.component";
 const routes: Routes = [
   {
     path: "products",
-    component: HomePage,
-    title: storeConfig.name,
+    loadChildren: () =>
+      import("./product-details-page/product-details.module").then(
+        (module) => module.ProductDetailsPageModule
+      ),
   },
   {
     path: "cart",
@@ -51,7 +52,9 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [
+    RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules }),
+  ],
   exports: [RouterModule],
 })
 export class PagesRoutingModule {}

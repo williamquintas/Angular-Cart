@@ -1,7 +1,10 @@
-<div class="card my-1 shadow-sm">
-  <a [routerLink]="[item.id]">
-    <img [src]="item.imageUrl" class="card-img-top" [alt]="item.title" />
-  </a>
+<div
+  class="card my-1 shadow-sm"
+  [routerLink]="[item.id]"
+  style="cursor: pointer"
+>
+  <img [src]="item.imageUrl" class="card-img-top" [alt]="item.title" />
+
   <h2 class="card-header text-truncate">
     {{ item.title }}
   </h2>
@@ -16,7 +19,7 @@
         class="btn btn-primary"
         ngbTooltip="Add to cart"
         placement="right"
-        (click)="addToCart()"
+        (click)="addToCart($event)"
       >
         <i class="bi bi-cart-plus"></i>
       </button>

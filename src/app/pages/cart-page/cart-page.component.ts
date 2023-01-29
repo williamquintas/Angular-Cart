@@ -60,7 +60,7 @@ export class CartPage {
         this.toastService.show(
           { body: "Item deleted" },
           {
-            classname: "bg-warn text-light",
+            classname: "bg-danger text-light",
           }
         );
       }

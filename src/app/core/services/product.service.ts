@@ -2,6 +2,7 @@ import { HttpClient, HttpResponse } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { map, Observable } from "rxjs";
 import {
+  IApiDataResponse,
   IApiListResponse,
   IApiService,
   IProduct,
@@ -42,5 +43,11 @@ export class ProductService implements IApiService<IProduct> {
             } as IApiListResponse<IProduct>)
         )
       );
+  };
+
+  get = (id: number): Observable<IApiDataResponse<IProduct>> => {
+    return this.httpClient
+      .get<IProduct>(`/products/${id}`)
+      .pipe(map((data) => ({ data })));
   };
 }
