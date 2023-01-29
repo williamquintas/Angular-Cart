@@ -8,13 +8,7 @@ import { IProduct } from "~shared/interfaces";
   styleUrls: ["./item.component.scss"],
 })
 export class ProductsItemComponent {
-  @Input() item: IProduct = {
-    id: 0,
-    title: "",
-    description: "",
-    imageUrl: "",
-    unitPrice: 0,
-  };
+  @Input() item!: IProduct;
 
   constructor(
     private cartService: CartService,

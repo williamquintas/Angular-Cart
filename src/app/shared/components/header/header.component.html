@@ -15,15 +15,35 @@
 
     <div [ngbCollapse]="isMenuCollapsed" class="navbar-collapse collapse">
       <ul class="navbar-nav">
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/categories">Categories</a>
+        <li class="nav-item" ngbDropdown display="dynamic">
+          <a
+            class="nav-link"
+            ngbDropdownToggle
+            id="categoriesDropdown"
+            role="button"
+          >
+            Categories
+          </a>
+          <div
+            ngbDropdownMenu
+            aria-labelledby="categoriesDropdown"
+            class="dropdown-menu"
+          >
+            <a
+              *ngFor="let category of productCategoryOptions"
+              ngbDropdownItem
+              [routerLink]="['.']"
+              [queryParams]="{ category: ProductCategoryLabels[category] }"
+              >{{ ProductCategoryLabels[category] }}</a
+            >
+          </div>
         </li>
 
         <ul class="navbar-nav">
           <li class="nav-item">
             <a
               class="nav-link"
-              [routerLink]="user ? '/user' : '/login'"
+              [routerLink]="user ? '/user' : '/user/login'"
               aria-label="Button with user icon"
             >
               <ng-container

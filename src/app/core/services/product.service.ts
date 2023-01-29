@@ -8,16 +8,12 @@ import {
   IProduct,
   IQueryParameters,
 } from "~shared/interfaces";
-import { ErrorService } from "./error.service";
 
 @Injectable({
   providedIn: "root",
 })
 export class ProductService implements IApiService<IProduct> {
-  constructor(
-    private httpClient: HttpClient,
-    private errorService: ErrorService
-  ) {}
+  constructor(private httpClient: HttpClient) {}
 
   getAll = (
     parameters: IQueryParameters

@@ -30,7 +30,7 @@ export class CanDeactivateCartGuard implements CanDeactivate<CanLeaveModal> {
     | boolean
     | UrlTree {
     const cartItemsList$ = this.cartService.getAll(),
-      isLeavingCartFlow = nextState?.url !== "/checkout";
+      isLeavingCartFlow = nextState?.url !== "/cart/checkout";
 
     return isLeavingCartFlow
       ? cartItemsList$.pipe(

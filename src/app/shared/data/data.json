@@ -4,12 +4,14 @@
       "id": 0,
       "title": "Thriller",
       "description": "Michael Jackson | 1982",
+      "category": "Pop",
       "imageUrl": "https://upload.wikimedia.org/wikipedia/en/5/55/Michael_Jackson_-_Thriller.png",
       "unitPrice": 51.29
     },
     {
       "id": 1,
       "description": "AC/DC | 1980",
+      "category": "Rock",
       "title": "Back in Black",
       "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3e/ACDC_Back_in_Black_cover.svg/480px-ACDC_Back_in_Black_cover.svg.png",
       "unitPrice": 30.19
@@ -17,6 +19,7 @@
     {
       "id": 2,
       "description": "Whitney Houston | 1992",
+      "category": "Pop",
       "title": "The Bodyguard",
       "imageUrl": "https://upload.wikimedia.org/wikipedia/pt/7/74/The_Bodyguard_trilha_sonora.jpg",
       "unitPrice": 28.79
@@ -24,6 +27,7 @@
     {
       "id": 3,
       "description": "Pink Floyd | 1973",
+      "category": "Rock",
       "title": "The Dark Side of the Moon",
       "imageUrl": "https://upload.wikimedia.org/wikipedia/pt/3/3b/Dark_Side_of_the_Moon.png",
       "unitPrice": 24.89
@@ -31,6 +35,7 @@
     {
       "id": 4,
       "description": "Eagles | 1976",
+      "category": "Rock",
       "title": "Hotel California",
       "imageUrl": "https://upload.wikimedia.org/wikipedia/en/4/49/Hotelcalifornia.jpg",
       "unitPrice": 31.89
@@ -38,6 +43,7 @@
     {
       "id": 5,
       "description": "Shania Twain | 1997",
+      "category": "Others",
       "title": "Come On Over",
       "imageUrl": "https://upload.wikimedia.org/wikipedia/en/0/0b/ShaniaTwainComeOnOver.png",
       "unitPrice": 30.49
@@ -45,6 +51,7 @@
     {
       "id": 6,
       "description": "Fleetwood Mac | 1977",
+      "category": "Rock",
       "title": "Rumours",
       "imageUrl": "https://upload.wikimedia.org/wikipedia/en/f/fb/FMacRumours.PNG",
       "unitPrice": 29.39
@@ -52,6 +59,7 @@
     {
       "id": 7,
       "description": "Bee Gees | 1977",
+      "category": "Others",
       "title": "Saturday Night Fever",
       "imageUrl": "https://upload.wikimedia.org/wikipedia/en/0/0c/TheBeeGeesSaturdayNightFeveralbumcover.jpg",
       "unitPrice": 22.19
