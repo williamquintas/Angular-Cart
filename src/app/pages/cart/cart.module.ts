@@ -3,11 +3,13 @@ import { NgModule } from "@angular/core";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { CoreModule } from "~core/core.module";
 import { SharedModule } from "~shared/shared.module";
-import { ProductDetailsPage } from "./product-details-page.component";
+import { CartPage } from "./cart-page/cart-page.component";
+import { CheckoutPage } from "./checkout-page/checkout-page.component";
+import { ConfirmationPage } from "./confirmation-page/confirmation-page.component";
 import { RoutingModule } from "./routing.module";
 
 @NgModule({
-  declarations: [ProductDetailsPage],
+  declarations: [CartPage, CheckoutPage, ConfirmationPage],
   imports: [
     CommonModule,
     CoreModule,
@@ -17,4 +19,4 @@ import { RoutingModule } from "./routing.module";
     FormsModule,
   ],
 })
-export class ProductDetailsPageModule {}
+export class CartModule {}

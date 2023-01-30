@@ -137,6 +137,6 @@ export class CartPage {
     };
 
     this.orderService.add(order);
-    this.router.navigate(["checkout"]);
+    this.router.navigate(["cart", "checkout"]);
   }
 }

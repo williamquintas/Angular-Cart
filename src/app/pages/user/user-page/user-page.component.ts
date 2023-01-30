@@ -44,6 +44,6 @@ export class UserPage {
 
   logout() {
     this.authenticationService.logout();
-    this.router.navigate(["login"]);
+    this.router.navigate(["user", "login"]);
   }
 }

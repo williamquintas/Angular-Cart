@@ -13,7 +13,7 @@ const VALID_COUPONS: ICoupon[] = [
 })
 export class CouponService {
   private appliedCoupons: ICoupon[] = [];
-  appliedCoupons$ = new BehaviorSubject<ICoupon[]>([]);
+  private appliedCoupons$ = new BehaviorSubject<ICoupon[]>([]);
 
   getAll() {
     return this.appliedCoupons$;

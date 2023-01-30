@@ -90,7 +90,7 @@ export class CheckoutPage {
         this.paymentMethodField.value as PaymentMethod
       );
       this.cartService.clear();
-      this.router.navigate(["confirmation"]);
+      this.router.navigate(["cart", "confirmation"]);
     }
   }
 }

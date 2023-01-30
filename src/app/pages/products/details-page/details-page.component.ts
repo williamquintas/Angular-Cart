@@ -6,10 +6,10 @@ import { IProduct } from "~shared/interfaces";
 
 @Component({
   selector: "app-product-details-page",
-  templateUrl: "./product-details-page.component.html",
-  styleUrls: ["./product-details-page.component.scss"],
+  templateUrl: "./details-page.component.html",
+  styleUrls: ["./details-page.component.scss"],
 })
-export class ProductDetailsPage {
+export class DetailsPage {
   product!: IProduct;
   isComponentDestroyed$ = new BehaviorSubject<boolean>(false);
   quantity = 1;

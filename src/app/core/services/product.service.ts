@@ -6,29 +6,26 @@ import {
   IApiListResponse,
   IApiService,
   IProduct,
-  IQueryParameters,
+  IProductQueryParameters,
 } from "~shared/interfaces";
-import { ErrorService } from "./error.service";
 
 @Injectable({
   providedIn: "root",
 })
 export class ProductService implements IApiService<IProduct> {
-  constructor(
-    private httpClient: HttpClient,
-    private errorService: ErrorService
-  ) {}
+  constructor(private httpClient: HttpClient) {}
 
   getAll = (
-    parameters: IQueryParameters
+    parameters: IProductQueryParameters
   ): Observable<IApiListResponse<IProduct>> => {
-    const { page, pageSize, order, search, sort } = parameters;
+    const { category, page, pageSize, order, search, sort } = parameters;
     return this.httpClient
       .get<IProduct[]>("/products", {
         params: {
           _page: page,
           _limit: pageSize,
-          ...(search ? { _q: search } : {}),
+          ...(search ? { title_like: search } : {}),
+          ...(category ? { category } : {}),
           ...(sort ? { _sort: sort } : {}),
           ...(order ? { _order: order } : {}),
         },

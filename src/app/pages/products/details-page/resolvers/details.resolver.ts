@@ -1,8 +1,9 @@
 import { Injectable } from "@angular/core";
 import { ActivatedRouteSnapshot, Resolve } from "@angular/router";
 import { map, Observable, of } from "rxjs";
+
 import { ProductService } from "~core/services";
-import { IProduct } from "../../shared/interfaces";
+import { IProduct } from "~shared/interfaces";
 
 @Injectable({
   providedIn: "root",

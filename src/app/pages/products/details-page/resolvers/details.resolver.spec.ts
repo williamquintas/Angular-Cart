@@ -1,8 +1,8 @@
-import { TestBed } from '@angular/core/testing';
+import { TestBed } from "@angular/core/testing";
 
-import { ProductDetailsResolver } from './product-details.resolver';
+import { ProductDetailsResolver } from "./details.resolver";
 
-describe('ProductDetailsResolver', () => {
+describe("ProductDetailsResolver", () => {
   let resolver: ProductDetailsResolver;
 
   beforeEach(() => {
@@ -10,7 +10,7 @@ describe('ProductDetailsResolver', () => {
     resolver = TestBed.inject(ProductDetailsResolver);
   });
 
-  it('should be created', () => {
+  it("should be created", () => {
     expect(resolver).toBeTruthy();
   });
 });

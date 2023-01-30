@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
-import { ErrorModalComponent } from "../../shared/components/error-modal/error-modal.component";
+import { ErrorModalComponent } from "~shared/components/error-modal/error-modal.component";
 
 @Injectable({
   providedIn: "root",

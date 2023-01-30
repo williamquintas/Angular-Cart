@@ -8,7 +8,7 @@ export interface IQueryParameters {
   search?: string;
 }
 
-export const PageSizeOptions = <const>[5, 10, 25, 50, 100];
+export const PageSizeOptions = <const>[6, 12, 24, 48, 100];
 
 export enum Order {
   ASC = "asc",
