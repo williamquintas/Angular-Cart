@@ -1,0 +1,10 @@
+<div class="container mt-4">
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a [routerLink]="['products']">Products</a></li>
+        <li class="breadcrumb-item active" aria-current="page">{{ category }}</li>
+      </ol>
+    </nav>
+    
+    <app-products-list [category]="category" />
+</div>

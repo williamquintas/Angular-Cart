@@ -6,14 +6,19 @@ import {
   UrlTree,
 } from "@angular/router";
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
-import { Observable } from "rxjs";
+import { mergeMap, Observable } from "rxjs";
+import { CartService } from "~core/services";
 import { CanLeaveModal } from "~shared/components/can-leave/can-leave.component";
+import { ICartItem } from "~shared/interfaces";
 
 @Injectable({
   providedIn: "root",
 })
 export class CanDeactivateCartGuard implements CanDeactivate<CanLeaveModal> {
-  constructor(private modalService: NgbModal) {}
+  constructor(
+    private cartService: CartService,
+    private modalService: NgbModal
+  ) {}
 
   canDeactivate(
     component: CanLeaveModal,
@@ -25,11 +30,17 @@ export class CanDeactivateCartGuard implements CanDeactivate<CanLeaveModal> {
     | Promise<boolean | UrlTree>
     | boolean
     | UrlTree {
-    if (nextState?.url !== "/checkout") {
-      const modal = this.modalService.open(CanLeaveModal);
-      return modal.result;
-    } else {
-      return true;
-    }
+    const cartItemsList$ = this.cartService.getAll(),
+      isLeavingCartFlow = nextState?.url !== "/cart/checkout";
+
+    return isLeavingCartFlow
+      ? cartItemsList$.pipe(
+          mergeMap(async (cartItemsList: ICartItem[]) =>
+            cartItemsList.length > 0
+              ? await this.modalService.open(CanLeaveModal).result
+              : true
+          )
+        )
+      : true;
   }
 }

@@ -1,4 +1,6 @@
 {
   "name": "Music Store",
-  "icon": "bi-vinyl-fill"
+  "icon": "bi-vinyl-fill",
+  "serverURL": "https://my-json-server.typicode.com/williamquintas/Music-Albums-JSON-Server",
+  "authenticationURL": "https://dummyjson.com"
 }

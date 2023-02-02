@@ -1,9 +1,12 @@
 import { Component } from "@angular/core";
 import { Subject, takeUntil } from "rxjs";
-import { IUser } from "~models/IUser";
-import { AuthenticationService } from "~services/authentication.service";
+import { AuthenticationService, ErrorService } from "~core/services";
 import storeConfig from "~shared/data/config.json";
-
+import { IUser } from "~shared/interfaces";
+import {
+  ProductCategory,
+  ProductCategoryLabels,
+} from "~shared/interfaces/Product.interface";
 @Component({
   selector: "app-header",
   templateUrl: "./header.component.html",
@@ -17,14 +20,28 @@ export class HeaderComponent {
   isMenuCollapsed = true;
   user!: IUser | null;
 
-  constructor(private authenticationService: AuthenticationService) {}
+  ProductCategory = ProductCategory;
+  ProductCategoryLabels: { [key: number]: string } = ProductCategoryLabels;
+  productCategoryOptions = Object.values(ProductCategory)
+    .filter((key) => !isNaN(Number(key)))
+    .map((key) => Number(key));
+
+  constructor(
+    private authenticationService: AuthenticationService,
+    private errorService: ErrorService
+  ) {}
 
   ngOnInit() {
     this.authenticationService
       .getUser()
       .pipe(takeUntil(this.isComponentDestroyed$))
-      .subscribe((user) => {
-        this.user = user;
+      .subscribe({
+        next: (user) => {
+          this.user = user;
+        },
+        error: (error) => {
+          this.errorService.open(error);
+        },
       });
   }
 

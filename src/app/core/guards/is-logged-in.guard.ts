@@ -7,7 +7,7 @@ import {
   UrlTree,
 } from "@angular/router";
 import { Observable } from "rxjs";
-import { AuthenticationService } from "~services/authentication.service";
+import { AuthenticationService } from "~core/services";
 
 @Injectable({
   providedIn: "root",
@@ -31,7 +31,7 @@ export class IsLoggedInGuard implements CanActivate {
     if (isLoggedIn) {
       return true;
     } else {
-      this.router.navigate(["login"]);
+      this.router.navigate(["user", "login"]);
       return false;
     }
   }

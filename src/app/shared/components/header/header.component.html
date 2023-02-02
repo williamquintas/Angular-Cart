@@ -15,21 +15,43 @@
 
     <div [ngbCollapse]="isMenuCollapsed" class="navbar-collapse collapse">
       <ul class="navbar-nav">
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/categories">Categories</a>
+        <li class="nav-item" ngbDropdown display="dynamic">
+          <a
+            class="nav-link"
+            ngbDropdownToggle
+            id="categoriesDropdown"
+            role="button"
+          >
+            Categories
+          </a>
+          <div
+            ngbDropdownMenu
+            aria-labelledby="categoriesDropdown"
+            class="dropdown-menu"
+          >
+            <a
+              *ngFor="let category of productCategoryOptions"
+              ngbDropdownItem
+              [routerLink]="['products', 'list']"
+              [queryParams]="{ category: ProductCategoryLabels[category] }"
+              >{{ ProductCategoryLabels[category] }}</a
+            >
+          </div>
         </li>
 
         <ul class="navbar-nav">
           <li class="nav-item">
             <a
               class="nav-link"
-              [routerLink]="user ? '/user' : '/login'"
+              [routerLink]="user ? '/user' : '/user/login'"
               aria-label="Button with user icon"
             >
               <ng-container
                 *ngIf="isMenuCollapsed && user; else isUserNotLogged"
               >
-                <span class="fw-bold">{{ user.name }}</span>
+                <span class="fw-bold"
+                  >{{ user.firstName }} {{ user.lastName }}</span
+                >
               </ng-container>
               <ng-template #isUserNotLogged>
                 <ng-container
@@ -43,7 +65,10 @@
                   ></i>
                 </ng-container>
               </ng-template>
-              <ng-template #userText>{{ user?.name ?? "User" }}</ng-template>
+              <ng-template #userText
+                >{{ user?.firstName ?? "User" }}
+                {{ user?.lastName }}</ng-template
+              >
             </a>
           </li>
           <li class="nav-item">
