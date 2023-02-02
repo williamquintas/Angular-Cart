@@ -15,8 +15,4 @@ describe("ListPageComponent", () => {
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
-
-  xit("should create", () => {
-    expect(component).toBeTruthy();
-  });
 });
