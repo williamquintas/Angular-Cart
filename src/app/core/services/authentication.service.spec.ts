@@ -44,9 +44,15 @@ describe("AuthenticationService", () => {
       expect(service.isLoggedIn).toBeTrue();
     });
 
-    const testRequest = httpController.expectOne("/auth/login");
-    expect(testRequest.request.method).toBe("POST");
-    testRequest.flush(mockedResponse);
+    const authenticationRequest = httpController.expectOne("/auth/login");
+    expect(authenticationRequest.request.method).toBe("POST");
+    authenticationRequest.flush(mockedResponse);
+
+    const getUserRequest = httpController.expectOne(
+      `/users/${mockedResponse.id}`
+    );
+    expect(getUserRequest.request.method).toBe("GET");
+    getUserRequest.flush(mockedResponse);
   });
 
   it("should fail if does not have token on response", () => {

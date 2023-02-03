@@ -7,3 +7,4 @@ export { HttpInterceptorService } from "./http-interceptor.service";
 export { OrderService } from "./order.service";
 export { ProductService } from "./product.service";
 export { ToastService } from "./toast.service";
+export { UserService } from "./user.service";
