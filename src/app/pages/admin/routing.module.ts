@@ -6,6 +6,8 @@ import { IsAdminLoggedInGuard } from "../../core/guards";
 
 import { AdminPage } from "./admin-page/admin-page.component";
 import { LoginPage } from "./login-page/login-page.component";
+import { ProductsListPage } from "./products-list-page/products-list-page.component";
+import { UsersListPage } from "./users-list-page/users-list-page.component";
 
 const routes: Routes = [
   {
@@ -19,6 +21,16 @@ const routes: Routes = [
     path: "login",
     component: LoginPage,
     title: `${storeConfig.name} | Admin Login`,
+  },
+  {
+    path: "products",
+    component: ProductsListPage,
+    title: `${storeConfig.name} | Products Management`,
+  },
+  {
+    path: "users",
+    component: UsersListPage,
+    title: `${storeConfig.name} | Users Management`,
   },
   {
     path: "**",

@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component } from "@angular/core";
 import { FormControl, FormGroup, Validators } from "@angular/forms";
 import { Router } from "@angular/router";
+import { Subject } from "rxjs";
 import { AuthenticationService, ErrorService } from "~core/services";
 
 @Component({
@@ -10,6 +11,7 @@ import { AuthenticationService, ErrorService } from "~core/services";
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LoginPage {
+  isLoading$ = new Subject<boolean>();
   form = new FormGroup({
     username: new FormControl("", [Validators.required]),
     password: new FormControl("", [Validators.required]),
@@ -22,6 +24,7 @@ export class LoginPage {
   ) {}
 
   login() {
+    this.isLoading$.next(true);
     this.authenticationService
       .login(this.form.getRawValue() as { username: string; password: string })
       .subscribe({
@@ -29,6 +32,7 @@ export class LoginPage {
           if (isAuthenticated) {
             this.router.navigate([""]);
           }
+          this.isLoading$.next(false);
         },
         error: (error: any) => {
           if (error.status === 400) {
@@ -36,6 +40,8 @@ export class LoginPage {
           }
 
           this.errorService.open(error);
+          this.form.reset();
+          this.isLoading$.next(false);
         },
       });
   }

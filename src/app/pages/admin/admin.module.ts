@@ -6,10 +6,11 @@ import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
 import { SharedModule } from "../../shared/shared.module";
 import { AdminPage } from "./admin-page/admin-page.component";
 import { LoginPage } from "./login-page/login-page.component";
+import { ProductsListPage } from "./products-list-page/products-list-page.component";
 import { RoutingModule } from "./routing.module";
 
 @NgModule({
-  declarations: [AdminPage, LoginPage],
+  declarations: [AdminPage, LoginPage, ProductsListPage],
   imports: [
     CommonModule,
     SharedModule,

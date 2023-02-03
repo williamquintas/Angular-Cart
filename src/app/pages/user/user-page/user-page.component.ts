@@ -12,6 +12,7 @@ import { IUser } from "~shared/interfaces";
 })
 export class UserPage {
   isComponentDestroyed$ = new Subject<boolean>();
+  isLoading$ = new Subject<boolean>();
 
   user!: IUser;
 
@@ -43,7 +44,9 @@ export class UserPage {
   }
 
   logout() {
+    this.isLoading$.next(true);
     this.authenticationService.logout();
     this.router.navigate(["user", "login"]);
+    this.isLoading$.next(false);
   }
 }
