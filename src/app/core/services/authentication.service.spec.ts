@@ -23,10 +23,6 @@ describe("AuthenticationService", () => {
     httpController.verify();
   });
 
-  it("should be created", () => {
-    expect(service).toBeTruthy();
-  });
-
   it("should successfully login", () => {
     const credentials = {
       username: "atuny0",

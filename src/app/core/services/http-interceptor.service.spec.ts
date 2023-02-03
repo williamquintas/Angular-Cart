@@ -7,7 +7,7 @@ import { TestBed } from "@angular/core/testing";
 import config from "~shared/data/config.json";
 import { HttpInterceptorService } from "./http-interceptor.service";
 
-describe("MyInterceptor", () => {
+describe("HttpInterceptor", () => {
   let httpMock: HttpTestingController;
   let httpClient: HttpClient;
 

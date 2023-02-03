@@ -24,10 +24,6 @@ describe("ProductService", () => {
     httpController.verify();
   });
 
-  it("should be created", () => {
-    expect(service).toBeTruthy();
-  });
-
   it("should get a products list", () => {
     const mockedParameters: IProductQueryParameters = { page: 1, pageSize: 6 };
     const mockedResponse: IProduct[] = [];

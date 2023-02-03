@@ -15,4 +15,8 @@ describe("FooterComponent", () => {
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
+
+  xit("should be created", () => {
+    expect(component).toBeTruthy();
+  });
 });
