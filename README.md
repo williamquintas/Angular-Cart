@@ -15,3 +15,8 @@ Then, click on the button with the Basket icon (on header menu) and the cart wil
 Finally, you can apply any coupon to verify the logic of applying discount on your order, and then finish it.
 
 The available coupons are: `DISCOUNT10`, `DISCOUNT20` and `DISCOUNT30`. It can be used combined and each of them can be used once.
+
+## Testing admin
+
+- Username: yraigatt3
+- Password: sRQxjPfdS

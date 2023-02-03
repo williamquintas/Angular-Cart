@@ -1,1 +1,77 @@
-<p>products-list-page works!</p>
+<div class="container bg-light">
+  <div class="d-flex flex-row justify-content-between align-items-center">
+    <h1 class="mt-2">Products</h1>
+    <button
+      class="btn btn-primary"
+      type="button"
+      [routerLink]="['/admin/products/add']"
+    >
+      <span>Add</span>
+      <i class="bi bi-plus-circle ms-2"></i>
+    </button>
+  </div>
+  <div class="table-responsive mt-2">
+    <table class="table table-striped table-borderless table-hover table-sm">
+      <thead>
+        <tr>
+          <th class="col">#</th>
+          <th class="col">Title</th>
+          <th class="col">Description</th>
+          <th class="col">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr
+          *ngFor="let product of productsList"
+          [routerLink]="['/admin/products/' + product.id]"
+          style="cursor: pointer"
+        >
+          <th scope="row">
+            <span>{{ product.id }}</span>
+          </th>
+          <td class="col">
+            <span>{{ product.title }}</span>
+          </td>
+          <td class="col">
+            <span>{{ product.description }}</span>
+          </td>
+          <td class="col">
+            <div class="d-flex-flex-row">
+              <button
+                class="btn btn-sm btn-outline-danger"
+                ngbTooltip="Delete"
+                (click)="
+                  $event.preventDefault();
+                  $event.stopPropagation();
+                  deleteProduct(product.id)
+                "
+                [disabled]="(productIdBeingDeleted$ | async) === product.id"
+              >
+                <ng-template #icon>
+                  <i class="bi bi-trash"></i>
+                </ng-template>
+                <span
+                  class="spinner-grow spinner-grow-sm"
+                  role="status"
+                  aria-hidden="true"
+                  *ngIf="
+                    (productIdBeingDeleted$ | async) === product.id;
+                    else icon
+                  "
+                ></span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="d-flex flex-row justify-content-center">
+      <div
+        class="spinner-grow"
+        role="status"
+        aria-hidden="true"
+        *ngIf="isLoading$ | async"
+      ></div>
+    </div>
+  </div>
+</div>
