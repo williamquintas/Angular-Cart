@@ -1,10 +1,10 @@
 import { ChangeDetectionStrategy, Component } from "@angular/core";
 import { FormControl, FormGroup, Validators } from "@angular/forms";
 import { Router } from "@angular/router";
-import { AuthenticationService, ErrorService } from "~core/services";
+import { AdminService, ErrorService } from "~core/services";
 
 @Component({
-  selector: "app-login-page",
+  selector: "app-admin-login-page",
   templateUrl: "./login-page.component.html",
   styleUrls: ["./login-page.component.scss"],
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -17,17 +17,17 @@ export class LoginPage {
 
   constructor(
     private router: Router,
-    private authenticationService: AuthenticationService,
+    private adminService: AdminService,
     private errorService: ErrorService
   ) {}
 
   login() {
-    this.authenticationService
+    this.adminService
       .login(this.form.getRawValue() as { username: string; password: string })
       .subscribe({
         next: (isAuthenticated) => {
           if (isAuthenticated) {
-            this.router.navigate([""]);
+            this.router.navigate(["admin"]);
           }
         },
         error: (error: any) => {
