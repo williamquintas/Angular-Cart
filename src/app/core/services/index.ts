@@ -1,3 +1,4 @@
+export { AddressService } from "./address.service";
 export { AdminService } from "./admin.service";
 export { AuthenticationService } from "./authentication.service";
 export { CartService } from "./cart.service";

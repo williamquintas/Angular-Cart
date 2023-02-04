@@ -7,8 +7,15 @@ import {
   Validators,
 } from "@angular/forms";
 import { Router } from "@angular/router";
-import { Subject } from "rxjs";
-import { UserService } from "~core/services";
+import {
+  BehaviorSubject,
+  debounceTime,
+  distinctUntilChanged,
+  of,
+  Subject,
+  switchMap,
+} from "rxjs";
+import { AddressService, UserService } from "~core/services";
 
 @Component({
   selector: "app-signup-page",
@@ -19,14 +26,47 @@ export class SignupPage {
   isComponentDestroyed$ = new Subject<boolean>();
   form!: FormGroup;
 
+  isLoadingAddress$ = new BehaviorSubject<boolean>(false);
+
   constructor(
     private formBuilder: FormBuilder,
+    private addressService: AddressService,
     private userService: UserService,
     private router: Router
   ) {}
 
   ngOnInit() {
     this.initForm();
+
+    this.form
+      .get("zipcode")
+      ?.valueChanges.pipe(
+        debounceTime(300),
+        distinctUntilChanged(),
+        switchMap((zipcode) => {
+          if (zipcode.length === 8 && this.form.get("zipcode")?.valid) {
+            this.isLoadingAddress$.next(true);
+            return this.addressService.getAddressByZipCode(zipcode);
+          }
+          return of(undefined);
+        })
+      )
+      .subscribe({
+        next: (address) => {
+          this.form.patchValue({
+            street: address?.["logradouro"],
+            neighborhood: address?.["bairro"],
+            city: address?.["localidade"],
+            state: address?.["uf"],
+          });
+        },
+        error: (err) => {
+          console.error(err);
+        },
+        complete: () => {
+          this.isLoadingAddress$.next(false);
+        },
+      });
   }
 
   ngOnDestroy() {

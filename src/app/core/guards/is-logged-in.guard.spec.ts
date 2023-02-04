@@ -57,6 +57,8 @@ describe("IsLoggedInGuard", () => {
 
     expect(result).toEqual(false);
     expect(authenticationSpy).toHaveBeenCalled();
-    expect(router.navigate).toHaveBeenCalledWith(["user", "login"]);
+    expect(router.navigate).toHaveBeenCalledWith(["user", "login"], {
+      queryParams: { redirectTo: undefined },
+    });
   });
 });

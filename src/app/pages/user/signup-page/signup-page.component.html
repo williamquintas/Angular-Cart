@@ -198,6 +198,7 @@
             (form.get('zipcode')?.dirty || form.get('zipcode')?.touched) &&
             form.get('zipcode')?.errors
           "
+          [disabled]="(isLoadingAddress$ | async) ?? false"
         />
         <span
           class="invalid-feedback"
