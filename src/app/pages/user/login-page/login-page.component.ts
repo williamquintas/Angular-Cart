@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component } from "@angular/core";
 import { FormControl, FormGroup, Validators } from "@angular/forms";
 import { ActivatedRoute, Router } from "@angular/router";
-import { Subject } from "rxjs";
+import { first, Subject } from "rxjs";
 import { AuthenticationService, ErrorService } from "~core/services";
 
 @Component({
@@ -31,9 +31,11 @@ export class LoginPage {
       .subscribe({
         next: (isAuthenticated) => {
           if (isAuthenticated) {
-            const routeSnapshot = this.currentRoute.snapshot;
-            const redirectTo = routeSnapshot.queryParams["redirectTo"];
-            this.router.navigate([redirectTo ?? ""]);
+            this.currentRoute.queryParams
+              .pipe(first())
+              .subscribe((queryParams) => {
+                this.router.navigate([queryParams?.["redirectTo"] ?? ""]);
+              });
           }
           this.isLoading$.next(false);
         },

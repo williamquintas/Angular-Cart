@@ -1,22 +1,75 @@
-import { ComponentFixture, TestBed } from "@angular/core/testing";
+import { HttpClientModule } from "@angular/common/http";
+import { async, TestBed } from "@angular/core/testing";
+import { FormBuilder, FormsModule, ReactiveFormsModule } from "@angular/forms";
+import { ActivatedRoute, Router } from "@angular/router";
+import { RouterTestingModule } from "@angular/router/testing";
 
+import { of } from "rxjs";
+import { AuthenticationService, ErrorService } from "~core/services";
 import { LoginPage } from "./login-page.component";
 
-describe("LoginPageComponent", () => {
+describe("LoginPage", () => {
   let component: LoginPage;
-  let fixture: ComponentFixture<LoginPage>;
+  let service: AuthenticationService;
+  let errorService: ErrorService;
+  let formBuilder: FormBuilder;
+  let activatedRoute: ActivatedRoute;
+  let router: Router;
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      declarations: [LoginPage],
-    }).compileComponents();
+  beforeEach(async(() => {
+    TestBed.configureTestingModule({
+      imports: [
+        RouterTestingModule,
+        FormsModule,
+        ReactiveFormsModule,
+        HttpClientModule,
+      ],
+      providers: [
+        LoginPage,
+        AuthenticationService,
+        FormBuilder,
+        ErrorService,
+        {
+          provide: ActivatedRoute,
+          useValue: { queryParams: of({}) },
+        },
+      ],
+    });
+    component = TestBed.inject(LoginPage);
+    service = TestBed.inject(AuthenticationService);
+    formBuilder = TestBed.inject(FormBuilder);
+    router = TestBed.inject(Router);
+    activatedRoute = TestBed.inject(ActivatedRoute);
+    errorService = TestBed.inject(ErrorService);
+  }));
 
-    fixture = TestBed.createComponent(LoginPage);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
+  it("should succesfully login", () => {
+    const mockedCredentials = {
+      username: "user",
+      password: "password",
+    };
+    spyOn(formBuilder, "group").and.callThrough();
+    spyOn(service, "login").and.returnValue(of(true));
+    spyOn(component.form, "getRawValue").and.returnValue(mockedCredentials);
+    spyOn(router, "navigate").and.returnValue(Promise.resolve(true));
+    activatedRoute.queryParams = of({});
+
+    component.login();
+
+    expect(router.navigate).toHaveBeenCalledWith([""]);
   });
 
-  xit("should be created", () => {
-    expect(component).toBeTruthy();
+  it("should not login", () => {
+    const mockedCredentials = {
+      username: "user",
+      password: "password",
+    };
+    spyOn(formBuilder, "group").and.callThrough();
+    spyOn(service, "login").and.throwError(new Error());
+    spyOn(component.form, "getRawValue").and.returnValue(mockedCredentials);
+    spyOn(errorService, "open").and.callFake(() => {});
+    activatedRoute.queryParams = of({});
+
+    expect(() => component.login()).toThrowError();
   });
 });
