@@ -20,3 +20,15 @@ The available coupons are: `DISCOUNT10`, `DISCOUNT20` and `DISCOUNT30`. It can b
 
 - Username: yraigatt3
 - Password: sRQxjPfdS
+
+## Testing user
+
+- Username: atuny0
+- Password: 9uQFF1Lh
+
+## Current coverage
+
+- Statements: 37.9% (213/562)
+- Branche: 40.47% (51/126)
+- Functions: 32% (72/225)
+- Lines: 36.59% (198/541)
