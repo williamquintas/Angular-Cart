@@ -19,7 +19,7 @@ export class IsLoggedInGuard implements CanActivate {
   ) {}
 
   canActivate(
-    route: ActivatedRouteSnapshot,
+    _route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ):
     | Observable<boolean | UrlTree>
@@ -31,7 +31,9 @@ export class IsLoggedInGuard implements CanActivate {
     if (isLoggedIn) {
       return true;
     } else {
-      this.router.navigate(["user", "login"]);
+      this.router.navigate(["user", "login"], {
+        queryParams: { redirectTo: state.url },
+      });
       return false;
     }
   }

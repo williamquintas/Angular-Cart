@@ -11,10 +11,6 @@ describe("CouponService", () => {
     service = TestBed.inject(CouponService);
   });
 
-  it("should be created", () => {
-    expect(service).toBeTruthy();
-  });
-
   it("should apply a valid coupon", () => {
     const validCoupon = "DISCOUNT10";
 

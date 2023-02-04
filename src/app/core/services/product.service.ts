@@ -22,8 +22,8 @@ export class ProductService implements IApiService<IProduct> {
     return this.httpClient
       .get<IProduct[]>("/products", {
         params: {
-          _page: page,
-          _limit: pageSize,
+          ...(page ? { _page: page } : {}),
+          ...(pageSize ? { _limit: pageSize } : {}),
           ...(search ? { title_like: search } : {}),
           ...(category ? { category } : {}),
           ...(sort ? { _sort: sort } : {}),
@@ -46,5 +46,23 @@ export class ProductService implements IApiService<IProduct> {
     return this.httpClient
       .get<IProduct>(`/products/${id}`)
       .pipe(map((data) => ({ data })));
+  };
+
+  create = (data: IProduct): Observable<void> => {
+    return this.httpClient
+      .post<IProduct>("/products", data)
+      .pipe(map(() => undefined));
+  };
+
+  update = (data: IProduct): Observable<void> => {
+    return this.httpClient
+      .put<IProduct>(`/products/${data.id}`, data)
+      .pipe(map(() => undefined));
+  };
+
+  delete = (id: number): Observable<void> => {
+    return this.httpClient
+      .delete<IProduct>(`/products/${id}`)
+      .pipe(map(() => undefined));
   };
 }

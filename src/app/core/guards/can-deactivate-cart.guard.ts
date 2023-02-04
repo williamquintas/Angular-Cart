@@ -21,9 +21,9 @@ export class CanDeactivateCartGuard implements CanDeactivate<CanLeaveModal> {
   ) {}
 
   canDeactivate(
-    component: CanLeaveModal,
-    currentRoute: ActivatedRouteSnapshot,
-    currentState: RouterStateSnapshot,
+    _component: CanLeaveModal,
+    _currentRoute: ActivatedRouteSnapshot,
+    _currentState: RouterStateSnapshot,
     nextState?: RouterStateSnapshot
   ):
     | Observable<boolean | UrlTree>
@@ -31,7 +31,12 @@ export class CanDeactivateCartGuard implements CanDeactivate<CanLeaveModal> {
     | boolean
     | UrlTree {
     const cartItemsList$ = this.cartService.getAll(),
-      isLeavingCartFlow = nextState?.url !== "/cart/checkout";
+      isLeavingCartFlow =
+        nextState &&
+        ![
+          "/cart/checkout",
+          "/user/login?redirectTo=%2Fcart%2Fcheckout",
+        ].includes(nextState.url);
 
     return isLeavingCartFlow
       ? cartItemsList$.pipe(

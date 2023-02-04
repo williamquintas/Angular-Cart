@@ -85,4 +85,16 @@ export class ProductsListComponent {
   onFormChange() {
     this.hasInputChanged$.next();
   }
+
+  get page() {
+    return this.parameters?.page ?? 1;
+  }
+
+  set page(page: number) {
+    this.parameters.page = page;
+  }
+
+  get pageSize() {
+    return this.parameters?.pageSize ?? 0;
+  }
 }

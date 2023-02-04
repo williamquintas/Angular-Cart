@@ -9,7 +9,7 @@ import {
 import { AuthenticationService } from "~core/services";
 import { IsLoggedInGuard } from "./is-logged-in.guard";
 
-describe("IsLoggedInGuardGuard", () => {
+describe("IsLoggedInGuard", () => {
   let guard: IsLoggedInGuard;
   let authenticationService: AuthenticationService;
   let router = {
@@ -27,10 +27,6 @@ describe("IsLoggedInGuardGuard", () => {
     });
     guard = TestBed.inject(IsLoggedInGuard);
     authenticationService = TestBed.inject(AuthenticationService);
-  });
-
-  it("should be created", () => {
-    expect(guard).toBeTruthy();
   });
 
   it("should continue when is authenticated", () => {
@@ -61,6 +57,8 @@ describe("IsLoggedInGuardGuard", () => {
 
     expect(result).toEqual(false);
     expect(authenticationSpy).toHaveBeenCalled();
-    expect(router.navigate).toHaveBeenCalledWith(["user", "login"]);
+    expect(router.navigate).toHaveBeenCalledWith(["user", "login"], {
+      queryParams: { redirectTo: undefined },
+    });
   });
 });

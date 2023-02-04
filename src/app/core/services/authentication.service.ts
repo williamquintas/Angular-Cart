@@ -1,7 +1,8 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { BehaviorSubject, map, Observable } from "rxjs";
+import { BehaviorSubject, map, Observable, of, switchMap } from "rxjs";
 import { IUser, UserRole } from "~shared/interfaces";
+import { UserService } from "./user.service";
 
 @Injectable({
   providedIn: "root",
@@ -10,7 +11,10 @@ export class AuthenticationService {
   private user: IUser | null = null;
   private user$ = new BehaviorSubject<IUser | null>(this.user);
 
-  constructor(private httpClient: HttpClient) {}
+  constructor(
+    private httpClient: HttpClient,
+    private userService: UserService
+  ) {}
 
   login(credentials: {
     username: string;
@@ -22,18 +26,22 @@ export class AuthenticationService {
         headers: { "Content-Type": "application/json" },
       })
       .pipe(
-        map((user: IUser) => {
-          const { token, ...params } = user;
-          if (!user || !token) {
-            return false;
-          } else {
-            this.user = { ...params, role: UserRole.COMMON };
-            localStorage.setItem("token", token);
-
-            this.user$.next(this.user);
-            return true;
-          }
-        })
+        switchMap((authenticatedUser: IUser) =>
+          authenticatedUser?.token
+            ? this.userService.getOne(authenticatedUser.id).pipe(
+                map(({ data: foundUser }) => {
+                  this.user = {
+                    ...authenticatedUser,
+                    ...foundUser,
+                    role: UserRole.COMMON,
+                  };
+                  localStorage.setItem("token", authenticatedUser.token ?? "");
+                  this.user$.next(this.user);
+                  return true;
+                })
+              )
+            : of(false)
+        )
       );
   }
 

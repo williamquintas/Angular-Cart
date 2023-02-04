@@ -7,6 +7,8 @@ import { PagesModule } from "~pages/pages.module";
 import { SharedModule } from "~shared/shared.module";
 
 describe("AppComponent", () => {
+  let component: AppComponent;
+
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [RouterTestingModule, CoreModule, PagesModule, SharedModule],
@@ -14,9 +16,7 @@ describe("AppComponent", () => {
     }).compileComponents();
   });
 
-  xit("should create the app", () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.componentInstance;
-    expect(app).toBeTruthy();
+  xit("should be created", () => {
+    expect(component).toBeTruthy();
   });
 });

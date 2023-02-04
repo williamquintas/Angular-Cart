@@ -1,8 +1,8 @@
 import { Observable } from "rxjs";
 
 export interface IQueryParameters {
-  page: number;
-  pageSize: typeof PageSizeOptions[number];
+  page?: number;
+  pageSize?: typeof PageSizeOptions[number];
   sort?: string;
   order?: Order;
   search?: string;
