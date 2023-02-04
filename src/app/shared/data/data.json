@@ -1,7 +1,7 @@
 {
   "products": [
     {
-      "id": 0,
+      "id": 1,
       "title": "Thriller",
       "description": "Michael Jackson | 1982",
       "category": "Pop",
@@ -9,7 +9,7 @@
       "unitPrice": 51.29
     },
     {
-      "id": 1,
+      "id": 2,
       "description": "AC/DC | 1980",
       "category": "Rock",
       "title": "Back in Black",
@@ -17,7 +17,7 @@
       "unitPrice": 30.19
     },
     {
-      "id": 2,
+      "id": 3,
       "description": "Whitney Houston | 1992",
       "category": "Pop",
       "title": "The Bodyguard",
@@ -25,7 +25,7 @@
       "unitPrice": 28.79
     },
     {
-      "id": 3,
+      "id": 4,
       "description": "Pink Floyd | 1973",
       "category": "Rock",
       "title": "The Dark Side of the Moon",
@@ -33,7 +33,7 @@
       "unitPrice": 24.89
     },
     {
-      "id": 4,
+      "id": 5,
       "description": "Eagles | 1976",
       "category": "Rock",
       "title": "Hotel California",
@@ -41,7 +41,7 @@
       "unitPrice": 31.89
     },
     {
-      "id": 5,
+      "id": 6,
       "description": "Shania Twain | 1997",
       "category": "Others",
       "title": "Come On Over",
@@ -49,7 +49,7 @@
       "unitPrice": 30.49
     },
     {
-      "id": 6,
+      "id": 7,
       "description": "Fleetwood Mac | 1977",
       "category": "Rock",
       "title": "Rumours",
@@ -57,12 +57,51 @@
       "unitPrice": 29.39
     },
     {
-      "id": 7,
+      "id": 8,
       "description": "Bee Gees | 1977",
       "category": "Others",
       "title": "Saturday Night Fever",
       "imageUrl": "https://upload.wikimedia.org/wikipedia/en/0/0c/TheBeeGeesSaturdayNightFeveralbumcover.jpg",
       "unitPrice": 22.19
     }
-  ]
+  ],
+  "orders": [],
+  "admins": [
+    {
+      "id": 1,
+      "firstName": "Miles",
+      "lastName": "Cummerata",
+      "email": "yraigatt3@nature.com",
+      "username": "yraigatt3",
+      "password": "sRQxjPfdS"
+    }
+  ],
+  "users": [
+    {
+      "id": 1,
+      "username": "atuny0",
+      "email": "atuny0@sohu.com",
+      "firstName": "Terry",
+      "lastName": "Medhurst",
+      "gender": "male",
+      "image": "https://robohash.org/hicveldicta.png",
+      "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJhdHVueTAiLCJlbWFpbCI6ImF0dW55MEBzb2h1LmNvbSIsImZpcnN0TmFtZSI6IlRlcnJ5IiwibGFzdE5hbWUiOiJNZWRodXJzdCIsImdlbmRlciI6Im1hbGUiLCJpbWFnZSI6Imh0dHBzOi8vcm9ib2hhc2gub3JnL2hpY3ZlbGRpY3RhLnBuZyIsImlhdCI6MTY3NTUxNTY3MCwiZXhwIjoxNjc1NTE5MjcwfQ.S67UsJi-ZTWlxNCNvom9h8cL1ZqN2IdtVZb97r6SRQ4",
+      "phoneNumber": "7916758914",
+      "password": "9uQFF1Lh",
+      "addresses": [
+        {
+          "zipcode": "20020",
+          "street": "1745 T Street Southeast",
+          "number": "42",
+          "neighborhood": "42",
+          "city": "Washington",
+          "state": "DC"
+        }
+      ],
+      "role": "Common",
+      "userName": "atuny0",
+      "acceptNewsletter": true
+    }
+  ],
+  "carts": []
 }

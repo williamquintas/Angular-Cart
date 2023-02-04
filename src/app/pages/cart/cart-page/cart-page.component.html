@@ -106,11 +106,16 @@
 
   <ng-template #emptyList>
     <div
-      class="d-flex flex-column align-items-center justify-content-center fw-bold"
-      style="height: 25vh"
+      class="d-flex flex-column align-items-center justify-content-center fw-lighter p-4 m-4"
     >
-      <p>Your cart is empty!</p>
-      <p>Please select some products.</p>
+      <p>Your cart is empty</p>
+
+      <img
+        src="/assets/empty-cart.png"
+        class="img-fluid rounded mb-2"
+        style="max-height: 400px"
+      />
+      <p>Please select some products</p>
     </div>
   </ng-template>
 </div>
