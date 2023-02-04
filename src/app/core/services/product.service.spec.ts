@@ -64,4 +64,54 @@ describe("ProductService", () => {
     expect(testRequest.request.method).toBe("GET");
     testRequest.flush(mockedItem);
   });
+
+  it("should create a new product", () => {
+    const mockedItem: IProduct = {
+      id: 1,
+      title: "some_title",
+      category: "some_category",
+      description: "some_description",
+      imageUrl: "some_image_url",
+      unitPrice: 0.99,
+    };
+
+    service.create(mockedItem).subscribe((response) => {
+      expect(response).toBeUndefined();
+    });
+
+    const testRequest = httpController.expectOne("/products");
+    expect(testRequest.request.method).toBe("POST");
+    testRequest.flush(mockedItem);
+  });
+
+  it("should update an existing product", () => {
+    const mockedItem: IProduct = {
+      id: 1,
+      title: "some_title",
+      category: "some_category",
+      description: "some_description",
+      imageUrl: "some_image_url",
+      unitPrice: 0.99,
+    };
+
+    service.update(mockedItem).subscribe((response) => {
+      expect(response).toBeUndefined();
+    });
+
+    const testRequest = httpController.expectOne(`/products/${mockedItem.id}`);
+    expect(testRequest.request.method).toBe("PUT");
+    testRequest.flush(mockedItem);
+  });
+
+  it("should delete a product", () => {
+    const id = 1;
+
+    service.delete(id).subscribe((response) => {
+      expect(response).toBeUndefined();
+    });
+
+    const testRequest = httpController.expectOne(`/products/${id}`);
+    expect(testRequest.request.method).toBe("DELETE");
+    testRequest.flush({});
+  });
 });

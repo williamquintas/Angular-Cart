@@ -48,7 +48,7 @@ export class SignupPage {
             this.isLoadingAddress$.next(true);
             return this.addressService.getAddressByZipCode(zipcode);
           }
-          return of(undefined);
+          return of({});
         })
       )
       .subscribe({

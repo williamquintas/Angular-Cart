@@ -30,18 +30,14 @@ export class AuthenticationService {
           authenticatedUser?.token
             ? this.userService.getOne(authenticatedUser.id).pipe(
                 map(({ data: foundUser }) => {
-                  if (authenticatedUser.token) {
-                    this.user = {
-                      ...authenticatedUser,
-                      ...foundUser,
-                      role: UserRole.COMMON,
-                    };
-                    localStorage.setItem("token", authenticatedUser.token);
-                    this.user$.next(this.user);
-                    return true;
-                  } else {
-                    return false;
-                  }
+                  this.user = {
+                    ...authenticatedUser,
+                    ...foundUser,
+                    role: UserRole.COMMON,
+                  };
+                  localStorage.setItem("token", authenticatedUser.token ?? "");
+                  this.user$.next(this.user);
+                  return true;
                 })
               )
             : of(false)

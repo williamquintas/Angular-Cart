@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed } from "@angular/core/testing";
-
+import storeConfig from "~shared/data/config.json";
 import { HomePage } from "./home-page.component";
 
 describe("HomePageComponent", () => {
@@ -7,16 +7,15 @@ describe("HomePageComponent", () => {
   let fixture: ComponentFixture<HomePage>;
 
   beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      declarations: [HomePage],
-    }).compileComponents();
-
     fixture = TestBed.createComponent(HomePage);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
 
-  xit("should be created", () => {
-    expect(component).toBeTruthy();
+  it("should have the correct text", () => {
+    const compiled = fixture.debugElement.nativeElement;
+    expect(compiled.querySelector("h1").textContent).toContain(
+      `Welcome to ${storeConfig.name}!`
+    );
   });
 });
