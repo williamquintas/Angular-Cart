@@ -1,0 +1,408 @@
+<div class="container bg-light my-4 px-4 py-2" style="max-width: 792px">
+  <h1 class="mt-2">Register</h1>
+
+  <form class="form" [formGroup]="form" *ngIf="form" (ngSubmit)="saveUser()">
+    <div class="row">
+      <div class="mb-2 col-12 col-md-6">
+        <label for="firstName" class="form-label">First Name</label>
+        <input
+          type="text"
+          class="form-control"
+          name="firstName"
+          id="firstName"
+          placeholder="First name"
+          formControlName="firstName"
+          [class.is-invalid]="
+            (form.get('firstName')?.dirty || form.get('firstName')?.touched) &&
+            form.get('firstName')?.errors
+          "
+        />
+        <span
+          class="invalid-feedback"
+          *ngIf="
+            (form.get('firstName')?.dirty || form.get('firstName')?.touched) &&
+            form.get('firstName')?.errors
+          "
+          >Required field</span
+        >
+      </div>
+      <div class="mb-2 col-12 col-md-6">
+        <label for="lastName" class="form-label">Last Name</label>
+        <input
+          type="text"
+          class="form-control"
+          name="lastName"
+          id="lastName"
+          placeholder="Last name"
+          formControlName="lastName"
+          [class.is-invalid]="
+            (form.get('lastName')?.dirty || form.get('lastName')?.touched) &&
+            form.get('lastName')?.errors
+          "
+        />
+        <span
+          class="invalid-feedback"
+          *ngIf="
+            (form.get('lastName')?.dirty || form.get('lastName')?.touched) &&
+            form.get('lastName')?.errors
+          "
+          >Required field</span
+        >
+      </div>
+    </div>
+    <div class="row">
+      <div class="mb-2 col-12 col-md-6">
+        <label for="userName" class="form-label">Username</label>
+        <input
+          type="text"
+          class="form-control"
+          name="userName"
+          id="userName"
+          placeholder="Username"
+          formControlName="userName"
+          [class.is-invalid]="
+            (form.get('userName')?.dirty || form.get('userName')?.touched) &&
+            form.get('userName')?.errors
+          "
+        />
+        <span
+          class="invalid-feedback"
+          *ngIf="
+            (form.get('userName')?.dirty || form.get('userName')?.touched) &&
+            form.get('userName')?.errors
+          "
+          >Required field</span
+        >
+      </div>
+      <div class="mb-2 col-12 col-md-6">
+        <label for="email" class="form-label">Email</label>
+        <input
+          type="email"
+          class="form-control"
+          name="email"
+          id="email"
+          aria-describedby="helpId"
+          placeholder="Email"
+          formControlName="email"
+          [class.is-invalid]="
+            (form.get('email')?.dirty || form.get('email')?.touched) &&
+            form.get('email')?.errors
+          "
+        />
+        <span
+          class="invalid-feedback"
+          *ngIf="
+            (form.get('email')?.dirty || form.get('email')?.touched) &&
+            form.get('email')?.errors
+          "
+          >Required field</span
+        >
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="mb-2 col-12 col-md-6">
+        <label for="email" class="form-label">Phone number</label>
+        <input
+          type="text"
+          class="form-control"
+          name="phoneNumber"
+          id="phoneNumber"
+          aria-describedby="helpId"
+          placeholder="Phone number"
+          formControlName="phoneNumber"
+          [class.is-invalid]="
+            (form.get('phoneNumber')?.dirty ||
+              form.get('phoneNumber')?.touched) &&
+            form.get('phoneNumber')?.errors
+          "
+        />
+        <span
+          class="invalid-feedback"
+          *ngIf="
+            (form.get('phoneNumber')?.dirty ||
+              form.get('phoneNumber')?.touched) &&
+            form.get('phoneNumber')?.errors
+          "
+          >{{
+                !!(form.get("phoneNumber")?.dirty || form.get("phoneNumber")?.touched) && form.get("phoneNumber")?.errors?.["minlength"]
+                  ? "At least 8 digits"
+                  : !!(form.get("phoneNumber")?.dirty || form.get("phoneNumber")?.touched) && form.get("phoneNumber")?.errors?.["maxlength"]
+                  ? "At most 12 digits"
+                  : "Required field"
+          }}</span
+        >
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="mb-2 col-12 col-md-6">
+        <label for="email" class="form-label">Password</label>
+        <input
+          type="password"
+          class="form-control"
+          name="password"
+          id="password"
+          placeholder="Password"
+          formControlName="password"
+          [class.is-invalid]="
+            (form.get('password')?.dirty || form.get('password')?.touched) &&
+            (form.get('password')?.errors || form.errors?.['shouldMatch'])
+          "
+        />
+        <span
+          class="invalid-feedback"
+          *ngIf="
+            (form.get('password')?.dirty || form.get('password')?.touched) &&
+            (form.get('password')?.errors || form.errors?.['shouldMatch'])
+          "
+          >{{
+                !!(form.get("password")?.dirty || form.get("password")?.touched) && form.errors?.['shouldMatch']
+                  ? "Password and confirmation should match"
+                  : !!(form.get("password")?.dirty || form.get("password")?.touched) && form.get("password")?.errors?.["minlength"]
+                  ? "At least 6 digits"
+                  : "Required field"
+          }}</span
+        >
+      </div>
+      <div class="mb-2 col-12 col-md-6">
+        <label for="email" class="form-label">Confirm Password</label>
+        <input
+          type="password"
+          class="form-control"
+          name="confirmPassword"
+          id="confirmPassword"
+          placeholder="Confirm Password"
+          formControlName="confirmPassword"
+          [class.is-invalid]="
+            (form.get('confirmPassword')?.dirty ||
+              form.get('confirmPassword')?.touched) &&
+            form.get('confirmPassword')?.errors
+          "
+        />
+      </div>
+    </div>
+
+    <div class="container card my-2 p-2">
+      <span class="fw-bold">Address</span>
+      <div class="mb-2">
+        <label for="zipcode" class="form-label">Zipcode</label>
+        <input
+          type="text"
+          class="form-control"
+          name="zipcode"
+          id="zipcode"
+          placeholder="Zipcode"
+          formControlName="zipcode"
+          [class.is-invalid]="
+            (form.get('zipcode')?.dirty || form.get('zipcode')?.touched) &&
+            form.get('zipcode')?.errors
+          "
+        />
+        <span
+          class="invalid-feedback"
+          *ngIf="
+            (form.get('street')?.dirty || form.get('street')?.touched) &&
+            form.get('street')?.errors
+          "
+          >Required field</span
+        >
+      </div>
+      <div class="mb-2 row">
+        <div class="col-9">
+          <label for="street" class="form-label">Street</label>
+          <input
+            type="text"
+            class="form-control"
+            name="street"
+            id="street"
+            placeholder="Street"
+            formControlName="street"
+            [class.is-invalid]="
+              (form.get('street')?.dirty || form.get('street')?.touched) &&
+              form.get('street')?.errors
+            "
+          />
+          <span
+            class="invalid-feedback"
+            *ngIf="
+              (form.get('street')?.dirty || form.get('street')?.touched) &&
+              form.get('street')?.errors
+            "
+            >Required field</span
+          >
+        </div>
+        <div class="col-3">
+          <label for="number" class="form-label">Number</label>
+          <input
+            type="number"
+            class="form-control"
+            name="number"
+            id="number"
+            placeholder="Number"
+            formControlName="number"
+            [class.is-invalid]="
+              (form.get('number')?.dirty || form.get('number')?.touched) &&
+              form.get('number')?.errors
+            "
+          />
+          <span
+            class="invalid-feedback"
+            *ngIf="
+              (form.get('number')?.dirty || form.get('number')?.touched) &&
+              form.get('number')?.errors
+            "
+            >Required field</span
+          >
+          <small id="helpId" class="form-text text-muted">Fill 0 if None</small>
+        </div>
+      </div>
+      <div class="mb-2 row">
+        <div class="col-6">
+          <label for="complement" class="form-label">Complement</label>
+          <input
+            type="text"
+            class="form-control"
+            name="complement"
+            id="complement"
+            placeholder="Complement"
+            formControlName="complement"
+          />
+        </div>
+        <div class="col-6">
+          <label for="neighborhood" class="form-label">Neighborhood</label>
+          <input
+            type="text"
+            class="form-control"
+            name="neighborhood"
+            id="neighborhood"
+            placeholder="Neighborhood"
+            formControlName="neighborhood"
+            [class.is-invalid]="
+              (form.get('neighborhood')?.dirty ||
+                form.get('neighborhood')?.touched) &&
+              form.get('neighborhood')?.errors
+            "
+          />
+          <span
+            class="invalid-feedback"
+            *ngIf="
+              (form.get('neighborhood')?.dirty ||
+                form.get('neighborhood')?.touched) &&
+              form.get('neighborhood')?.errors
+            "
+            >Required field</span
+          >
+        </div>
+      </div>
+      <div class="mb-2 row">
+        <div class="col-9">
+          <label for="city" class="form-label">City</label>
+          <input
+            type="text"
+            class="form-control"
+            name="city"
+            id="city"
+            placeholder="City"
+            formControlName="city"
+            [class.is-invalid]="
+              (form.get('city')?.dirty || form.get('city')?.touched) &&
+              form.get('city')?.errors
+            "
+          />
+          <span
+            class="invalid-feedback"
+            *ngIf="
+              (form.get('city')?.dirty || form.get('city')?.touched) &&
+              form.get('city')?.errors
+            "
+            >Required field</span
+          >
+        </div>
+        <div class="col-3">
+          <label for="state" class="form-label">State</label>
+          <input
+            type="text"
+            class="form-control"
+            name="state"
+            id="state"
+            placeholder="State"
+            formControlName="state"
+            [class.is-invalid]="
+              (form.get('state')?.dirty || form.get('state')?.touched) &&
+              form.get('state')?.errors
+            "
+          />
+          <span
+            class="invalid-feedback"
+            *ngIf="
+              (form.get('state')?.dirty || form.get('state')?.touched) &&
+              form.get('state')?.errors
+            "
+            >Required field</span
+          >
+        </div>
+      </div>
+    </div>
+    <div class="mb-2 form-check form-switch">
+      <input
+        class="form-check-input"
+        type="checkbox"
+        role="switch"
+        id="acceptNewsletter"
+        name="acceptNewsletter"
+        formControlName="acceptNewsletter"
+      />
+      <label class="form-check-label" for="acceptNewsletter"
+        >Accept to receive Newsletter email</label
+      >
+    </div>
+    <div class="mb-2 form-check form-switch">
+      <input
+        class="form-check-input"
+        type="checkbox"
+        role="switch"
+        id="acceptPrivacyPolicy"
+        name="acceptPrivacyPolicy"
+        formControlName="acceptPrivacyPolicy"
+        [class.is-invalid]="
+          (form.get('acceptPrivacyPolicy')?.dirty ||
+            form.get('acceptPrivacyPolicy')?.touched) &&
+          form.get('acceptPrivacyPolicy')?.errors
+        "
+        required
+      />
+      <label class="form-check-label" for="acceptPrivacyPolicy"
+        >I agree with <a href="#">privacy policy</a> terms and conditions
+      </label>
+      <div class="invalid-feedback">You must agree before submitting.</div>
+    </div>
+    <div class="mb-2 form-check form-switch">
+      <input
+        class="form-check-input"
+        type="checkbox"
+        role="switch"
+        id="acceptDataUsage"
+        name="acceptDataUsage"
+        formControlName="acceptDataUsage"
+        [class.is-invalid]="
+          (form.get('acceptDataUsage')?.dirty ||
+            form.get('acceptDataUsage')?.touched) &&
+          form.get('acceptDataUsage')?.errors
+        "
+        required
+      />
+      <label class="form-check-label" for="acceptDataUsage"
+        >I authorize the usage of my personnal data during my navigation and
+        system utilization.
+      </label>
+      <div class="invalid-feedback">You must agree before submitting.</div>
+    </div>
+
+    <div class="d-flex flex-row justify-content-end">
+      <button class="btn btn-primary btn-sm">
+        Save <i class="bi bi-save ms-2"></i>
+      </button>
+    </div>
+  </form>
+</div>

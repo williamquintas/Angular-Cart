@@ -8,10 +8,11 @@ import { SharedModule } from "~shared/shared.module";
 
 import { LoginPage } from "./login-page/login-page.component";
 import { RoutingModule } from "./routing.module";
+import { SignupPage } from "./signup-page/signup-page.component";
 import { UserPage } from "./user-page/user-page.component";
 
 @NgModule({
-  declarations: [LoginPage, UserPage],
+  declarations: [LoginPage, UserPage, SignupPage],
   imports: [
     CommonModule,
     SharedModule,

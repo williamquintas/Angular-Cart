@@ -1,7 +1,7 @@
 import { NgModule } from "@angular/core";
 import { RouterModule, Routes } from "@angular/router";
 
-import { CanDeactivateCartGuard } from "~core/guards";
+import { CanDeactivateCartGuard, IsLoggedInGuard } from "~core/guards";
 import storeConfig from "~shared/data/config.json";
 
 import { CartPage } from "./cart-page/cart-page.component";
@@ -20,6 +20,7 @@ const routes: Routes = [
     path: "checkout",
     component: CheckoutPage,
     title: `${storeConfig.name} | Checkout`,
+    canActivate: [IsLoggedInGuard],
   },
   {
     path: "confirmation",
@@ -28,7 +29,7 @@ const routes: Routes = [
   },
   {
     path: "**",
-    redirectTo: "../products",
+    redirectTo: "",
   },
 ];
 

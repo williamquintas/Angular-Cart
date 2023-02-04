@@ -20,6 +20,12 @@ export class UserService implements IApiService<IUser> {
       );
   }
 
+  create(user: IUser): Observable<void> {
+    return this.httpClient
+      .post<IUser>("/users", user)
+      .pipe(map((response) => undefined));
+  }
+
   update(user: IUser): Observable<void> {
     return this.httpClient
       .put<IUser>(`/users/${user.id}`, user)
