@@ -29,24 +29,27 @@ export class ProductsEditorPage {
   ) {}
 
   ngOnInit() {
-    const routeSnapshot = this.currentRoute.snapshot;
-    const id = routeSnapshot.params["id"];
+    this.currentRoute.params
+      .pipe(takeUntil(this.isComponentDestroyed$))
+      .subscribe((params) => {
+        const id = params["id"];
 
-    this.mode = !id || id === "add" ? Mode.CREATE : Mode.EDIT;
+        this.mode = !id || id === "add" ? Mode.CREATE : Mode.EDIT;
 
-    if (this.mode === Mode.EDIT) {
-      this.isLoading$.next(true);
-      this.productService
-        .get(Number(id))
-        .pipe(takeUntil(this.isComponentDestroyed$))
-        .subscribe(({ data: product }) => {
-          this.product = product;
+        if (this.mode === Mode.EDIT) {
+          this.isLoading$.next(true);
+          this.productService
+            .get(Number(id))
+            .pipe(takeUntil(this.isComponentDestroyed$))
+            .subscribe(({ data: product }) => {
+              this.product = product;
+              this.initForm();
+              this.isLoading$.next(false);
+            });
+        } else {
           this.initForm();
-          this.isLoading$.next(false);
-        });
-    } else {
-      this.initForm();
-    }
+        }
+      });
   }
 
   ngOnDestroy() {
