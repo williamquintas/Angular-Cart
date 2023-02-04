@@ -1,1 +1,146 @@
-<p>products-editor-page works!</p>
+<div class="container bg-light my-4 px-4 py-2" style="max-width: 792px">
+  <h1 class="mt-2">Product Management</h1>
+  <div class="d-flex flex-row justify-content-center">
+    <span
+      class="spinner-grow spinner-grow"
+      role="status"
+      aria-hidden="true"
+      *ngIf="isLoading$ | async"
+    ></span>
+  </div>
+  <form class="form" [formGroup]="form" *ngIf="form" (ngSubmit)="saveProduct()">
+    <div class="row">
+      <div class="mb-2 col-12 col-md-6">
+        <label for="title" class="form-label">Title</label>
+        <input
+          type="text"
+          class="form-control"
+          name="title"
+          id="title"
+          placeholder="Title"
+          formControlName="title"
+          [class.is-invalid]="
+            (form.get('title')?.dirty || form.get('title')?.touched) &&
+            form.get('title')?.errors
+          "
+        />
+        <span
+          class="invalid-feedback"
+          *ngIf="
+            (form.get('title')?.dirty || form.get('title')?.touched) &&
+            form.get('title')?.errors
+          "
+        >
+          Required field
+        </span>
+      </div>
+      <div class="mb-2 col-12 col-md-6">
+        <label for="category" class="form-label">Category</label>
+        <input
+          type="text"
+          class="form-control"
+          name="category"
+          id="category"
+          placeholder="Category"
+          formControlName="category"
+          [class.is-invalid]="
+            (form.get('category')?.dirty || form.get('category')?.touched) &&
+            form.get('category')?.errors
+          "
+        />
+        <span
+          class="invalid-feedback"
+          *ngIf="
+            (form.get('category')?.dirty || form.get('category')?.touched) &&
+            form.get('category')?.errors
+          "
+        >
+          Required field
+        </span>
+      </div>
+    </div>
+    <div class="row">
+      <div class="mb-2 col">
+        <label for="description" class="form-label">Description</label>
+        <input
+          type="text"
+          class="form-control"
+          name="description"
+          id="description"
+          placeholder="Description"
+          formControlName="description"
+          [class.is-invalid]="
+            (form.get('description')?.dirty ||
+              form.get('description')?.touched) &&
+            form.get('description')?.errors
+          "
+        />
+        <span
+          class="invalid-feedback"
+          *ngIf="
+            (form.get('description')?.dirty ||
+              form.get('description')?.touched) &&
+            form.get('description')?.errors
+          "
+        >
+          Required field
+        </span>
+      </div>
+    </div>
+    <div class="row">
+      <div class="mb-2 col-9">
+        <label for="imageUrl" class="form-label">Image URL</label>
+        <input
+          type="text"
+          class="form-control"
+          name="imageUrl"
+          id="imageUrl"
+          placeholder="Image URL"
+          formControlName="imageUrl"
+          [class.is-invalid]="
+            (form.get('imageUrl')?.dirty || form.get('imageUrl')?.touched) &&
+            form.get('imageUrl')?.errors
+          "
+        />
+        <span
+          class="invalid-feedback"
+          *ngIf="
+            (form.get('imageUrl')?.dirty || form.get('imageUrl')?.touched) &&
+            form.get('imageUrl')?.errors
+          "
+        >
+          Required field
+        </span>
+      </div>
+      <div class="mb-2 col-3">
+        <label for="unitPrice" class="form-label">Unit price ($)</label>
+        <input
+          type="text"
+          class="form-control"
+          name="unitPrice"
+          id="unitPrice"
+          placeholder="Unit price ($)"
+          formControlName="unitPrice"
+          [class.is-invalid]="
+            (form.get('unitPrice')?.dirty || form.get('unitPrice')?.touched) &&
+            form.get('unitPrice')?.errors
+          "
+        />
+        <span
+          class="invalid-feedback"
+          *ngIf="
+            (form.get('unitPrice')?.dirty || form.get('unitPrice')?.touched) &&
+            form.get('unitPrice')?.errors
+          "
+        >
+          Required field
+        </span>
+      </div>
+    </div>
+    <div class="d-flex flex-row justify-content-center my-4">
+      <button class="btn btn-primary" [disabled]="!form.valid">
+        Save <i class="bi bi-save ms-2"></i>
+      </button>
+    </div>
+  </form>
+</div>
